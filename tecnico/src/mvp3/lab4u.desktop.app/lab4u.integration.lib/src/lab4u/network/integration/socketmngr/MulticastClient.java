@@ -41,31 +41,59 @@ public class MulticastClient {
 
     private static final Logger LOG = Logger.getLogger(MulticastClient.class.getName());
     
-    private long timemillisToWayForOpenSockets = 1l * 1000l;
+    
     /**
      * This method send information about
      * how any socket can't conect with me.
      * @throws IOException 
      */
-    public void sendFindOpenSockects() throws IOException
+    public void sendFindOpenSockects(ISocketListenerAnswers iSocketListener) throws IOException
     {
-        MulticastSocket socket = new MulticastSocket(4446);
-        InetAddress address = InetAddress.getByName("230.0.0.1");
+        MulticastSocket socket = new MulticastSocket(Constants.MulticastClientPort);
+        InetAddress address = InetAddress.getByName(Constants.MulticastIP);
         socket.joinGroup(address);
 
         DatagramPacket packet;
         byte[] buf = new byte[256];
         packet = new DatagramPacket(buf, buf.length);
-        socket.receive(packet);
-
-        String received = new String(packet.getData(), 0,
-                        packet.getLength());
         
-        LOG.log(Level.FINER,"Server Addres:"+packet.getAddress());
-        LOG.log(Level.FINER,"Mes: " + received);
+        long tIni = System.currentTimeMillis();
+        Thread thread = new Thread(new SimpleMessage());
+        thread.start();
         
-        socket.leaveGroup(address);
-        socket.close();
+        while(Constants.timemillisToWayForOpenSockets > getDifIni(tIni)){
+            socket.receive(packet);
+            iSocketListener.notifiedClient(packet);
+            String received = new String(packet.getData(), 0,
+                            packet.getLength());
+            LOG.log(Level.FINER, "Server Addres:{0}", packet.getAddress());
+            LOG.log(Level.FINER, "Mes: {0}", received);
+            socket.leaveGroup(address);
+            socket.close();
+        }
     }
+
+    class SimpleMessage implements Runnable{
+
+        @Override
+        public void run() {
+            try {
+                String lab4uClient = "LAB4U_CLI_HI";
+                MulticastSocket socket = new MulticastSocket(Constants.MulticastClientPort);
+                InetAddress address = InetAddress.getByName(Constants.MulticastIP);
+                socket.joinGroup(address);
+                InetAddress addres = InetAddress.getByName(Constants.MulticastIP);
+                DatagramPacket packet = new DatagramPacket(lab4uClient.getBytes(), lab4uClient.length(),addres, Constants.MulticastServerPort);
+                socket.send(packet);
+            } catch (IOException ex) {
+                Logger.getLogger(MulticastClient.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    private long getDifIni(long tIni) {
+        return System.currentTimeMillis() - tIni;
+    }
+
 
 }

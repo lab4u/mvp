@@ -121,15 +121,6 @@ public class SocketThread extends Thread{
         this.client = client;
         this.start();
     }
-
-    // Declare the interface. The method messageReceived(String message) will
-    // must be implemented in the ServerBoard
-    // class at on startServer button click
-    public interface ISocketThreadListener {
-
-        public void messageReceived(ISocketMessage message);
-        
-    }
     
     public String getClientName(){
         String name = "Empty";

@@ -4,24 +4,37 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.MulticastSocket;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ajperalt on 7/10/13.
  */
 public class SocketServerMulticastListener extends Thread {
 
-    protected DatagramSocket socket = null;
+    protected MulticastSocket socket = null;
     private boolean socketServerListenerLive = true;
-
-    public SocketServerMulticastListener() throws IOException {
-        this("QuoteServerThread");
+    private ISocketListenerAnswers isocketListener = null;
+            
+    public SocketServerMulticastListener(ISocketListenerAnswers isocketListene) throws IOException {
+        this("SocketServerMulticastListener");
+        this.addISocketListenerAnswers(isocketListener);
     }
 
     public SocketServerMulticastListener(String name) throws IOException {
         super(name);
-        socket = new DatagramSocket(4445);
+        socket = new MulticastSocket(Constants.MulticastServerPort);
     }
 
+    public void addISocketListenerAnswers(ISocketListenerAnswers isocketListener){
+        this.isocketListener = isocketListener;
+    }
+    
+    public void removeISocketListenerAnswers(){
+        this.isocketListener = null;
+    }
+    
     public void run() {
 
         while (socketServerListenerLive) {
@@ -32,16 +45,16 @@ public class SocketServerMulticastListener extends Thread {
                 DatagramPacket packet = new DatagramPacket(buf, buf.length);
                 socket.receive(packet);
 
-                // figure out response
-                String dString = "Hi";
-
-                buf = dString.getBytes();
-
-                // send the response to the client at "address" and "port"
-                InetAddress address = packet.getAddress();
-                int port = packet.getPort();
-                packet = new DatagramPacket(buf, buf.length, address, port);
-                socket.send(packet);
+                if(this.isocketListener != null){
+                     // send the response to the client at "address" and "port"
+                    InetAddress address = packet.getAddress();
+                    int port = packet.getPort();
+                    packet = this.isocketListener.notifiedServer(packet);
+                    packet.setAddress(address);
+                    packet.setPort(port);
+                    socket.send(packet);
+                }
+               
             } catch (IOException e) {
                 e.printStackTrace();
             }

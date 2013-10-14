@@ -29,7 +29,9 @@ public class FilePersistSensorInfo implements ILab4uSensorPersistence {
 
 
     public FilePersistSensorInfo(String name) {
-        this.name = name;
+        if(name != null && ! "".equalsIgnoreCase(name)){
+            this.name = name.replaceAll(" ","");
+        }
         this.init();
     }
 
@@ -44,18 +46,15 @@ public class FilePersistSensorInfo implements ILab4uSensorPersistence {
 
     public void initFile() {
         try {
-            Log.v(LAB4UTAG.T, "START initFile[" + name + "]");
+            Log.v(LAB4UTAG.T, "START initFile[" + this.name + "]");
             File root = Environment.getExternalStorageDirectory();
             if (root.canWrite()) {
                 Log.v(LAB4UTAG.T, "can write continue");
                 // build lab4usensor file
-                File dir = new File(root.getAbsolutePath() + "/lab4u");
+                File dir = new File(root.getAbsolutePath() + File.separator + "lab4u" + File.separator + this.name);
                 dir.mkdirs();
-                // build lab4u sensor by sensor
-                //File dirSensor = new File(dir, name);
-                //dir.mkdirs();
                 SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyHHmmss");
-                String fileName = name + sdf.format(new Date()) + ".csv";
+                String fileName = sdf.format(new Date()) + ".csv";
                 File file = new File(dir, fileName);
                 Log.v(LAB4UTAG.T, "FileFullPath["+file.getCanonicalPath()+"]");
                 fos = new FileOutputStream(file);

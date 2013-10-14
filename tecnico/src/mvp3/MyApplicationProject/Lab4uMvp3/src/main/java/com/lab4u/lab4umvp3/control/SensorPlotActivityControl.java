@@ -19,7 +19,7 @@ public class SensorPlotActivityControl implements Lab4uSensorEventListener {
 
     private SensorPlotActivityModel model;
 
-    private static long delayToRedraw = 3 * 1000;
+    private static long delayToRedraw = 5 * 1000;
     private long actualTime = 0l;
 
     private Sensor mySensor;

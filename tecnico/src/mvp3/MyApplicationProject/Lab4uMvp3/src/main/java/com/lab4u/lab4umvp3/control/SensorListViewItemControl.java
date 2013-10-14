@@ -14,6 +14,7 @@ import com.lab4u.lab4umvp3.view.AdapterSensorListView;
 import com.lab4u.sensors.listenersensors.Lab4uSensorEventListener;
 import com.lab4u.sensors.persistence.FilePersistSensorInfo;
 import com.lab4u.sensors.persistence.ILab4uSensorPersistence;
+import com.lab4u.sensors.persistence.Lab4uSensorEmptyPersistence;
 
 /**
  * Created by ajperalt on 29/09/13.
@@ -22,7 +23,7 @@ public class SensorListViewItemControl  implements Lab4uSensorEventListener {
     private static String TAG = LAB4UTAG.T + SensorListViewItemControl.class.getSimpleName();
 
     private SensorListViewItemModel model;
-    private ILab4uSensorPersistence persistence;
+    private ILab4uSensorPersistence persistence = Lab4uSensorEmptyPersistence.getInstance();
     private Sensor mySensor;
 
     public SensorListViewItemControl(SensorListViewItemModel model) {
@@ -43,7 +44,11 @@ public class SensorListViewItemControl  implements Lab4uSensorEventListener {
         model.getTxtX().setText("X:"+event.values[0]);
         model.getTxtY().setText("Y:"+event.values[1]);
         model.getTxtZ().setText("Z:"+event.values[2]);
-
+        if(persistence == null){
+            Log.d(TAG,"persistence = null");
+        }else{
+            persistence.print(event.values);
+        }
     }
 
 
@@ -63,8 +68,8 @@ public class SensorListViewItemControl  implements Lab4uSensorEventListener {
     public void registerListener(Sensor s, SensorManager sm) {
         this.mySensor = s;
         this.model.getTxtSensorName().setText(this.mySensor.getName());
-        sm.registerListener(this,s,SensorModelControl.SENSOR_DELAY);
         persistence = new FilePersistSensorInfo(this.mySensor.getName());
+        sm.registerListener(this,s,SensorModelControl.SENSOR_DELAY);
     }
 
     public SensorListViewItemModel getModel() {
@@ -77,9 +82,10 @@ public class SensorListViewItemControl  implements Lab4uSensorEventListener {
 
     public void unregisterListener(SensorManager sm) {
         sm.unregisterListener(this,this.mySensor);
-        if(persistence != null){
+        if(persistence != null &&
+                ! persistence.equals(Lab4uSensorEmptyPersistence.getInstance())){
             persistence.close();
-            persistence = null;
+            persistence = Lab4uSensorEmptyPersistence.getInstance();
         }
     }
 

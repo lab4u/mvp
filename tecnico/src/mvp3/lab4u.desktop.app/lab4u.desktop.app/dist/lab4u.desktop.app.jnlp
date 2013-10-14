@@ -11,7 +11,8 @@
   </resources>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="lab4u.desktop.app.jar" size="36995" download="eager" />
+    <jar href="lab4u.desktop.app.jar" size="31390" download="eager" />
+    <jar href="lib/lab4u.integration.lib.jar" size="41699" download="eager" />
   </resources>
 <security>
   <all-permissions/>

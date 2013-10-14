@@ -1,6 +1,7 @@
 package com.lab4u.lab4umvp3.view;
 
 import com.lab4u.lab4umvp3.R;
+import com.lab4u.lab4umvp3.bussines.Lab4uBC;
 import com.lab4u.lab4umvp3.view.AdapterSensorListView;
 
 import android.annotation.TargetApi;
@@ -27,6 +28,11 @@ public class MainActivity extends Activity {
     private ListView lvSensorInfo = null;
     private SensorManager sm = null;
 
+
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +44,9 @@ public class MainActivity extends Activity {
 
     }
 
+    /**
+     *
+     */
     private void configSensorListView() {
         lvSensorInfo = (ListView)findViewById(R.id.lvSensorInfo);
         adapterSensorListView = new AdapterSensorListView
@@ -45,6 +54,9 @@ public class MainActivity extends Activity {
         lvSensorInfo.setAdapter(adapterSensorListView);
     }
 
+    /**
+     *
+     */
     private void addBtnAction() {
         Button btnStartSensorListener = (Button)findViewById(R.id.btnStartSensorListener);
         btnStartSensorListener.setOnClickListener(new View.OnClickListener() {
@@ -70,32 +82,41 @@ public class MainActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 Intent intent = new Intent(MainActivity.this, SensorPlotActivity.class);
-                int sensorType =  adapterSensorListView.getItem(position).getControl().getMySensor().getType();
+                int sensorType = adapterSensorListView.getItem(position).getControl().getMySensor().getType();
 
-                intent.putExtra(SensorPlotActivity.SENSOR_TYPE,sensorType);
+                intent.putExtra(SensorPlotActivity.SENSOR_TYPE, sensorType);
                 startActivity(intent);
             }
         });
     }
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-    }
-
+    /**
+     *
+     */
     @Override
     protected void onResume() {
         adapterSensorListView.startSensorListener(sm);
+        Lab4uBC.getInstance().startSensorListener(sm);
         super.onResume();
     }
+
+    /**
+     *
+     */
     @Override
     protected void onPause() {
         adapterSensorListView.stopSensorListener(sm);
+        Lab4uBC.getInstance().stopSensorListener(sm);
         super.onPause();
     }
+
+    /**
+     *
+     */
     @Override
     protected void onStop() {
         adapterSensorListView.stopSensorListener(sm);
+        Lab4uBC.getInstance().stopSensorListener(sm);
         super.onStop();
     }
 
