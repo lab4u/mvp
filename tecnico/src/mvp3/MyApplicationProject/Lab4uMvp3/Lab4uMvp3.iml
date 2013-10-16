@@ -17,7 +17,7 @@
     </facet>
     <facet type="android-gradle" name="Android-Gradle">
       <configuration>
-        <option name="GRADLE_PROJECT_PATH" value=":Lab4uMPV2" />
+        <option name="GRADLE_PROJECT_PATH" value=":Lab4uMvp3" />
       </configuration>
     </facet>
   </component>
@@ -71,6 +71,8 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="support-v4-18.0.0" level="project" />
     <orderEntry type="library" exported="" name="ComAndroidSupportAppcompatV71800.aar" level="project" />
+    <orderEntry type="library" exported="" name="lab4u.integration.lib" level="project" />
+    <orderEntry type="library" exported="" name="androidplot-core-0.6.0" level="project" />
   </component>
 </module>
 

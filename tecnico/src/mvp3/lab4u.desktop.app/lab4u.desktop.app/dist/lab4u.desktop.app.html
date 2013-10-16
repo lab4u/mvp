@@ -1,0 +1,44 @@
+<html><head>
+  <SCRIPT src="./web-files/dtjava.js"></SCRIPT>
+<script>
+    function launchApplication(jnlpfile) {
+        dtjava.launch(            {
+                url : 'lab4u.desktop.app.jnlp',
+                jnlp_content : 'PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPGpubHAgc3BlYz0iMS4wIiB4bWxuczpqZng9Imh0dHA6Ly9qYXZhZnguY29tIiBocmVmPSJsYWI0dS5kZXNrdG9wLmFwcC5qbmxwIj4KICA8aW5mb3JtYXRpb24+CiAgICA8dGl0bGU+bGFiNHUuZGVza3RvcC5hcHA8L3RpdGxlPgogICAgPHZlbmRvcj5hanBlcmFsdDwvdmVuZG9yPgogICAgPGRlc2NyaXB0aW9uPlNhbXBsZSBKYXZhRlggMi4wIGFwcGxpY2F0aW9uLjwvZGVzY3JpcHRpb24+CiAgICA8b2ZmbGluZS1hbGxvd2VkLz4KICA8L2luZm9ybWF0aW9uPgogIDxyZXNvdXJjZXM+CiAgICA8amZ4OmphdmFmeC1ydW50aW1lIHZlcnNpb249IjIuMisiIGhyZWY9Imh0dHA6Ly9qYXZhZGwuc3VuLmNvbS93ZWJhcHBzL2Rvd25sb2FkL0dldEZpbGUvamF2YWZ4LWxhdGVzdC93aW5kb3dzLWk1ODYvamF2YWZ4Mi5qbmxwIi8+CiAgPC9yZXNvdXJjZXM+CiAgPHJlc291cmNlcz4KICAgIDxqMnNlIHZlcnNpb249IjEuNisiIGhyZWY9Imh0dHA6Ly9qYXZhLnN1bi5jb20vcHJvZHVjdHMvYXV0b2RsL2oyc2UiLz4KICAgIDxqYXIgaHJlZj0ibGFiNHUuZGVza3RvcC5hcHAuamFyIiBzaXplPSIzMTM5MCIgZG93bmxvYWQ9ImVhZ2VyIiAvPgogICAgPGphciBocmVmPSJsaWIvbGFiNHUuaW50ZWdyYXRpb24ubGliLmphciIgc2l6ZT0iNDE2OTkiIGRvd25sb2FkPSJlYWdlciIgLz4KICA8L3Jlc291cmNlcz4KPHNlY3VyaXR5PgogIDxhbGwtcGVybWlzc2lvbnMvPgo8L3NlY3VyaXR5PgogIDxhcHBsZXQtZGVzYyAgd2lkdGg9IjgwMCIgaGVpZ2h0PSI2MDAiIG1haW4tY2xhc3M9ImNvbS5qYXZhZngubWFpbi5Ob0phdmFGWEZhbGxiYWNrIiAgbmFtZT0ibGFiNHUuZGVza3RvcC5hcHAiID4KICAgIDxwYXJhbSBuYW1lPSJyZXF1aXJlZEZYVmVyc2lvbiIgdmFsdWU9IjIuMisiLz4KICA8L2FwcGxldC1kZXNjPgogIDxqZng6amF2YWZ4LWRlc2MgIHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIiBtYWluLWNsYXNzPSJsYWI0dS5kZXNrdG9wLmFwcC5MYWI0dURlc2t0b3BBcHAiICBuYW1lPSJsYWI0dS5kZXNrdG9wLmFwcCIgLz4KICA8dXBkYXRlIGNoZWNrPSJhbHdheXMiLz4KPC9qbmxwPgo='
+            },
+            {
+                javafx : '2.2+'
+            },
+            {}
+        );
+        return false;
+    }
+</script>
+
+<script>
+    function javafxEmbed() {
+        dtjava.embed(
+            {
+                url : 'lab4u.desktop.app.jnlp',
+                placeholder : 'javafx-app-placeholder',
+                width : 800,
+                height : 600,
+                jnlp_content : 'PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPGpubHAgc3BlYz0iMS4wIiB4bWxuczpqZng9Imh0dHA6Ly9qYXZhZnguY29tIiBocmVmPSJsYWI0dS5kZXNrdG9wLmFwcC5qbmxwIj4KICA8aW5mb3JtYXRpb24+CiAgICA8dGl0bGU+bGFiNHUuZGVza3RvcC5hcHA8L3RpdGxlPgogICAgPHZlbmRvcj5hanBlcmFsdDwvdmVuZG9yPgogICAgPGRlc2NyaXB0aW9uPlNhbXBsZSBKYXZhRlggMi4wIGFwcGxpY2F0aW9uLjwvZGVzY3JpcHRpb24+CiAgICA8b2ZmbGluZS1hbGxvd2VkLz4KICA8L2luZm9ybWF0aW9uPgogIDxyZXNvdXJjZXM+CiAgICA8amZ4OmphdmFmeC1ydW50aW1lIHZlcnNpb249IjIuMisiIGhyZWY9Imh0dHA6Ly9qYXZhZGwuc3VuLmNvbS93ZWJhcHBzL2Rvd25sb2FkL0dldEZpbGUvamF2YWZ4LWxhdGVzdC93aW5kb3dzLWk1ODYvamF2YWZ4Mi5qbmxwIi8+CiAgPC9yZXNvdXJjZXM+CiAgPHJlc291cmNlcz4KICAgIDxqMnNlIHZlcnNpb249IjEuNisiIGhyZWY9Imh0dHA6Ly9qYXZhLnN1bi5jb20vcHJvZHVjdHMvYXV0b2RsL2oyc2UiLz4KICAgIDxqYXIgaHJlZj0ibGFiNHUuZGVza3RvcC5hcHAuamFyIiBzaXplPSIzMTM5MCIgZG93bmxvYWQ9ImVhZ2VyIiAvPgogICAgPGphciBocmVmPSJsaWIvbGFiNHUuaW50ZWdyYXRpb24ubGliLmphciIgc2l6ZT0iNDE2OTkiIGRvd25sb2FkPSJlYWdlciIgLz4KICA8L3Jlc291cmNlcz4KPHNlY3VyaXR5PgogIDxhbGwtcGVybWlzc2lvbnMvPgo8L3NlY3VyaXR5PgogIDxhcHBsZXQtZGVzYyAgd2lkdGg9IjgwMCIgaGVpZ2h0PSI2MDAiIG1haW4tY2xhc3M9ImNvbS5qYXZhZngubWFpbi5Ob0phdmFGWEZhbGxiYWNrIiAgbmFtZT0ibGFiNHUuZGVza3RvcC5hcHAiID4KICAgIDxwYXJhbSBuYW1lPSJyZXF1aXJlZEZYVmVyc2lvbiIgdmFsdWU9IjIuMisiLz4KICA8L2FwcGxldC1kZXNjPgogIDxqZng6amF2YWZ4LWRlc2MgIHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIiBtYWluLWNsYXNzPSJsYWI0dS5kZXNrdG9wLmFwcC5MYWI0dURlc2t0b3BBcHAiICBuYW1lPSJsYWI0dS5kZXNrdG9wLmFwcCIgLz4KICA8dXBkYXRlIGNoZWNrPSJhbHdheXMiLz4KPC9qbmxwPgo='
+            },
+            {
+                javafx : '2.2+'
+            },
+            {}
+        );
+    }
+    <!-- Embed FX application into web page once page is loaded -->
+    dtjava.addOnloadCallback(javafxEmbed);
+</script>
+
+</head><body>
+<h2>Test page for <b>lab4u.desktop.app</b></h2>
+  <b>Webstart:</b> <a href='lab4u.desktop.app.jnlp' onclick="return launchApplication('lab4u.desktop.app.jnlp');">click to launch this app as webstart</a><br><hr><br>
+
+  <!-- Applet will be inserted here -->
+  <div id='javafx-app-placeholder'></div>
+</body></html>
