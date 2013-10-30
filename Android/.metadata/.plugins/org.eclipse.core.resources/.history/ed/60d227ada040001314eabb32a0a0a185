@@ -1,0 +1,7 @@
+package co.lab4u.instruments.adapters;
+
+import android.widget.ArrayAdapter;
+
+public class LabItemAdapter extends ArrayAdapter<String> {
+
+}

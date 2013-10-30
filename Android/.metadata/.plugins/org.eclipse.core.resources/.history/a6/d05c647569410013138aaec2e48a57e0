@@ -1,0 +1,36 @@
+package co.lab4u.instruments.models;
+
+import java.util.Date;
+
+public class EmptyLaboratory implements ILaboratory {
+
+	@Override
+	public int getId() {
+		return -1;
+	}
+
+	@Override
+	public String getTitle() {
+		return "";
+	}
+
+	@Override
+	public String getContent() {
+		return "";
+	}
+
+	@Override
+	public Calendar getCreationDate() {
+		throw new UnsupportedOperationException("");
+	}
+
+	@Override
+	public Calendar getLastModifiedDate() {
+		return null;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return true;
+	}
+}

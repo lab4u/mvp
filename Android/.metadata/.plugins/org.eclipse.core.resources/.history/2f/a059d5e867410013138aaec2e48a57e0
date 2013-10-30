@@ -1,0 +1,82 @@
+package co.lab4u.instruments.models;
+
+import java.util.Date;
+
+public class Laboratory implements ILaboratory {
+	private int id;
+	private String title;
+	private String content;
+	private Date creationDate;
+	private Date lastModifiedDate;
+	
+	/* (non-Javadoc)
+	 * @see co.lab4u.instruments.models.ILaboratory#getId()
+	 */
+	@Override
+	public int getId() {
+		return id;
+	}
+	/* (non-Javadoc)
+	 * @see co.lab4u.instruments.models.ILaboratory#setId(int)
+	 */
+	@Override
+	public void setId(int id) {
+		this.id = id;
+	}
+	/* (non-Javadoc)
+	 * @see co.lab4u.instruments.models.ILaboratory#getTitle()
+	 */
+	@Override
+	public String getTitle() {
+		return title;
+	}
+	/* (non-Javadoc)
+	 * @see co.lab4u.instruments.models.ILaboratory#setTitle(java.lang.String)
+	 */
+	@Override
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	/* (non-Javadoc)
+	 * @see co.lab4u.instruments.models.ILaboratory#getContent()
+	 */
+	@Override
+	public String getContent() {
+		return content;
+	}
+	/* (non-Javadoc)
+	 * @see co.lab4u.instruments.models.ILaboratory#setContent(java.lang.String)
+	 */
+	@Override
+	public void setContent(String content) {
+		this.content = content;
+	}
+	/* (non-Javadoc)
+	 * @see co.lab4u.instruments.models.ILaboratory#getCreationDate()
+	 */
+	@Override
+	public Date getCreationDate() {
+		return creationDate;
+	}
+	/* (non-Javadoc)
+	 * @see co.lab4u.instruments.models.ILaboratory#setCreationDate(java.util.Date)
+	 */
+	@Override
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+	/* (non-Javadoc)
+	 * @see co.lab4u.instruments.models.ILaboratory#getLastModifiedDate()
+	 */
+	@Override
+	public Date getLastModifiedDate() {
+		return lastModifiedDate;
+	}
+	/* (non-Javadoc)
+	 * @see co.lab4u.instruments.models.ILaboratory#setLastModifiedDate(java.util.Date)
+	 */
+	@Override
+	public void setLastModifiedDate(Date lastModifiedDate) {
+		this.lastModifiedDate = lastModifiedDate;
+	}
+}

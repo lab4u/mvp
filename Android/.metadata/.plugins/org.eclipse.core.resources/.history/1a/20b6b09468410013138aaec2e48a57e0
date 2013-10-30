@@ -1,0 +1,25 @@
+package co.lab4u.instruments.models;
+
+import java.util.Date;
+
+public class LaboratoryStaticFactory {
+	// singleton for LaboratoryStaticFactory
+	private static LaboratoryStaticFactory instance = null;
+	
+	private LaboratoryStaticFactory() {	}
+	
+	public static LaboratoryStaticFactory getInstance() {
+		if (instance == null) instance = new LaboratoryStaticFactory();
+		
+		return instance;
+	}
+	
+	public ILaboratory CreateLaboratory(int id, String title, String content, Date creationDate, Date lastModifiedDate) {
+		return new Laboratory(id, title, content, creationDate, lastModifiedDate,)
+	}
+	
+	
+	
+	
+
+}

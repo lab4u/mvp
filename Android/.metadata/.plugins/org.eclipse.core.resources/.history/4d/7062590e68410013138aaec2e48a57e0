@@ -1,0 +1,67 @@
+package co.lab4u.instruments.models;
+
+import java.util.Date;
+
+public class EmptyLaboratory implements ILaboratory {
+
+	@Override
+	public int getId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setId(int id) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public String getTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setTitle(String title) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public String getContent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setContent(String content) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public Date getCreationDate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setCreationDate(Date creationDate) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public Date getLastModifiedDate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setLastModifiedDate(Date lastModifiedDate) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

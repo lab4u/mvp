@@ -1,0 +1,40 @@
+package co.lab4u.instruments.adapters;
+
+import co.lab4u.instruments.R;
+import co.lab4u.instruments.models.ILaboratory;
+import co.lab4u.instruments.models.Laboratory;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class LabItemAdapter extends ArrayAdapter<Laboratory> {
+	private final Context context;
+	private final ILaboratory[] values;
+	
+	public LabItemAdapter(Context context, Laboratory[] values) {
+		super(context, R.layout.activity_lab_finder_item, values);
+	    this.context = context;
+	    this.values = values;
+	}
+	
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+	  LayoutInflater inflater = (LayoutInflater) context
+	      .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	  View rowView = inflater.inflate(R.layout.activity_lab_finder_item, parent, false);
+	  
+	  ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
+	  TextView textViewTitle = (TextView) rowView.findViewById(R.id.labTitle);
+	  TextView textViewContent = (TextView) rowView.findViewById(R.id.labContent);
+	   
+	  textViewTitle.setText("Some Lab");
+	  textViewContent.setText("Som Content!!");
+	    
+	  return rowView;
+	}
+
+}

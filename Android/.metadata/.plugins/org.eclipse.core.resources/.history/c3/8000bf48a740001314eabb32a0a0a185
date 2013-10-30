@@ -1,0 +1,38 @@
+package co.lab4u.instruments.adapters;
+
+import co.lab4u.instruments.R;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class LabItemAdapter extends ArrayAdapter<String> {
+	private final Context context;
+	private final String[] values;
+	
+	public LabItemAdapter(Context context, String[] values) {
+		super(context, R.layout.activity_lab_finder_item, values);
+	    this.context = context;
+	    this.values = values;
+	}
+	
+	@Override
+	  public View getView(int position, View convertView, ViewGroup parent) {
+	    LayoutInflater inflater = (LayoutInflater) context
+	        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	    View rowView = inflater.inflate(R.layout.activity_lab_finder_item, parent, false);
+	    
+	    ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
+	    TextView textVieTitle = (TextView) rowView.findViewById(R.id.labTitle);
+	    TextView textViewContent = (TextView) rowView.findViewById(R.id.labContent);
+	    
+	    textView.setText(values[position]);
+	    
+	    
+	    return rowView;
+	  }
+
+}

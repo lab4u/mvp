@@ -1,0 +1,16 @@
+package co.lab4u.instruments.adapters;
+
+import android.content.Context;
+import android.widget.ArrayAdapter;
+
+public class LabItemAdapter extends ArrayAdapter<String> {
+	private final Context context;
+	private final String[] values;
+	
+	public LabItemAdapter(Context context, String[] values) {
+		super(context, R.layout.rowlayout, values);
+	    this.context = context;
+	    this.values = values;
+	}
+
+}

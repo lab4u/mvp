@@ -1,0 +1,13 @@
+package co.lab4u.instruments.adapters;
+
+import android.content.Context;
+import android.widget.ArrayAdapter;
+
+public class LabItemAdapter extends ArrayAdapter<String> {
+
+	public LabItemAdapter(Context context, String[] values) {
+		super(context, values);
+		// TODO Auto-generated constructor stub
+	}
+
+}

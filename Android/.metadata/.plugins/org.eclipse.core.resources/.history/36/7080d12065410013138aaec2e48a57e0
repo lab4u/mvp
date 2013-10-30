@@ -1,0 +1,5 @@
+package co.lab4u.instruments.models;
+
+public class Laboratory {
+
+}

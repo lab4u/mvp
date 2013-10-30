@@ -1,0 +1,14 @@
+package co.lab4u.instruments.models;
+
+import java.util.Date;
+
+public interface ILaboratory {
+
+	public abstract int getId();
+	public abstract String getTitle();
+	public abstract String getContent();
+	public abstract Date getCreationDate();
+	public abstract Date getLastModifiedDate();
+	public abstract boolean isEmpty();
+	
+}

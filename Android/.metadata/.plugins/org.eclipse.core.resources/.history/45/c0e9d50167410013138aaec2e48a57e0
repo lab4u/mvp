@@ -1,0 +1,14 @@
+package co.lab4u.instruments.models;
+
+public class LaboratoryStaticFactory {
+	private final static LaboratoryStaticFactory instance = null;
+	
+	private LaboratoryStaticFactory() {	}
+	
+	public static LaboratoryStaticFactory getInstance() {
+		if (instance == null) instance = new LaboratoryStaticFactory();
+		
+		return instance;
+	}
+
+}

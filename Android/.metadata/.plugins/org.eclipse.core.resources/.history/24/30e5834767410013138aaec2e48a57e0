@@ -1,0 +1,27 @@
+package co.lab4u.instruments.models;
+
+import java.util.Date;
+
+public interface ILaboratory {
+
+	public abstract int getId();
+
+	public abstract void setId(int id);
+
+	public abstract String getTitle();
+
+	public abstract void setTitle(String title);
+
+	public abstract String getContent();
+
+	public abstract void setContent(String content);
+
+	public abstract Date getCreationDate();
+
+	public abstract void setCreationDate(Date creationDate);
+
+	public abstract Date getLastModifiedDate();
+
+	public abstract void setLastModifiedDate(Date lastModifiedDate);
+
+}
