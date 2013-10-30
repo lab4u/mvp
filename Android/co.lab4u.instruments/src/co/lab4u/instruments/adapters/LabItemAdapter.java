@@ -37,7 +37,7 @@ public class LabItemAdapter extends ArrayAdapter<ILaboratory> {
 	  
 		// populates the model
 		ILaboratory lab = this.values.get(position);
-		if (lab.isEmpty() != false) {
+		if (lab.isEmpty() == false) {
 			textViewTitle.setText(lab.getTitle());
 			textViewContent.setText(lab.getContent());
 		} 
