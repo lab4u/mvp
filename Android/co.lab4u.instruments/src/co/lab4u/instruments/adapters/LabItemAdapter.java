@@ -27,22 +27,31 @@ public class LabItemAdapter extends ArrayAdapter<ILaboratory> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 	  
 		// let's inflate our xml
-		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View rowView = inflater.inflate(R.layout.activity_lab_finder_item, parent, false);
-		
+		View rowView = this.inflateView(parent); 
+				
 		// gets our widgets from the view
 		ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
 		TextView textViewTitle = (TextView) rowView.findViewById(R.id.labTitle);
 		TextView textViewContent = (TextView) rowView.findViewById(R.id.labContent);
 	  
 		// populates the model
+		this.bindModel(rowView, position, imageView, textViewTitle, textViewContent);
+		
+		return rowView;
+	}
+	
+	private View inflateView(ViewGroup parent) {
+		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View rowView = inflater.inflate(R.layout.activity_lab_finder_item, parent, false);
+		return rowView;
+	}
+	
+	private void bindModel(View rowView, int position, View imageView, TextView textViewTitle, TextView textViewContent) {
 		ILaboratory lab = this.values.get(position);
 		if (lab.isEmpty() == false) {
 			textViewTitle.setText(lab.getTitle());
 			textViewContent.setText(lab.getContent());
-		} 
-	    
-		return rowView;
+		}
 	}
 
 }
