@@ -26,6 +26,14 @@
             android:name="co.lab4u.instruments.LabFinderItem"
             android:label="@string/title_activity_lab_finder_item" >
         </activity>
+        <activity
+            android:name="co.lab4u.instruments.LabViewer"
+            android:label="@string/title_activity_lab_viewer"
+            android:parentActivityName="co.lab4u.instruments.LabFinder" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="co.lab4u.instruments.LabFinder" />
+        </activity>
     </application>
 
 </manifest>
