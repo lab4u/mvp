@@ -31,7 +31,7 @@ public class LabFinderUnitTest extends android.test.ActivityUnitTestCase<LabFind
 	
 	@SmallTest
 	public void testLabItemAdapter() {
-		
+		//TODO: test single selection
 	}
 	
 

@@ -40,7 +40,7 @@ public class LabFinderItemUnitTest extends android.test.ActivityUnitTestCase<Lab
 	private void assertFakeViewNotAllowed(Activity activity) {
 		int fakeActivityId = -777;
 		View view = activity.findViewById(fakeActivityId);
-		assertNull("Fakes activities not allowed", view);
+		assertNull("Fakes activities are not allowed", view);
 	}
 
 	private void assertTextViewTitle(Activity activity) {
