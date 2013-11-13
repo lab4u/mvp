@@ -6,9 +6,17 @@ import java.util.Date;
 import java.util.List;
 
 import android.app.ListActivity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.SyncStateContract.Constants;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 import co.lab4u.instruments.adapters.LabItemAdapter;
 import co.lab4u.instruments.models.ILaboratory;
 import co.lab4u.instruments.models.Laboratory;
@@ -16,7 +24,7 @@ import co.lab4u.instruments.models.LaboratoryStaticFactory;
 
 public class LabFinder extends ListActivity {
 
-    @Override
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
@@ -32,6 +40,32 @@ public class LabFinder extends ListActivity {
         // bind to adapter
         setListAdapter(adapter);
         
-        getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-    }        
+        ListView listView = getListView();
+        
+        listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        
+        listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position,
+					long id) {
+				
+				Intent intent = new Intent(LabFinder.this, LabViewer.class);
+				
+				TextView titleView = (TextView)view.findViewById(R.id.labTitle);
+				TextView contentView = (TextView)view.findViewById(R.id.labContent);
+				
+			    Bundle bundle = new Bundle();
+			    bundle.putString(Const.LAB_TITLE_KEY, titleView.getText().toString());
+			    bundle.putString(Const.LAB_CONTENT_KEY, contentView.getText().toString());
+			    
+			    intent.putExtra(Const.BUNDLE_GENERIC_KEY, bundle);
+			    
+				startActivity(intent);
+			}
+        });
+        
+    }       
+    
+    
 }

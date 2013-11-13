@@ -4,18 +4,32 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.support.v4.app.NavUtils;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 
 public class LabViewer extends Activity {
 
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lab_viewer);
 		// Show the Up button in the action bar.
 		setupActionBar();
+		
+		Intent intent = getIntent();
+		
+		TextView titleTextView = (TextView) this.findViewById(R.id.labTitle);
+		TextView contentTextView = (TextView) this.findViewById(R.id.labContent);
+		
+		Bundle b = intent.getBundleExtra(Const.BUNDLE_GENERIC_KEY);
+		
+		titleTextView.setText(b.getString(Const.LAB_TITLE_KEY));
+		contentTextView.setText(b.getString(Const.LAB_CONTENT_KEY));
 	}
 
 	/**
