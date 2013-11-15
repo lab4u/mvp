@@ -9,7 +9,8 @@ import junit.framework.TestCase;
 
 public class LabFinderUnitTest extends android.test.ActivityUnitTestCase<LabFinder> {
 
-	private LabFinder activityUnderTest;
+	private LabFinder labFinderFixture;
+	
 	
 	public LabFinderUnitTest() {
 		super(LabFinder.class);
@@ -26,12 +27,13 @@ public class LabFinderUnitTest extends android.test.ActivityUnitTestCase<LabFind
 	        LabFinder.class);
 	    
 	    startActivity(intent, null, null);
-	    activityUnderTest = getActivity();
+	    labFinderFixture = getActivity();
+	    
 	}
 	
 	@SmallTest
-	public void testLabItemAdapter() {
-		//TODO: test single selection
+	public void testListItemOnClick() {
+		
 	}
 	
 
