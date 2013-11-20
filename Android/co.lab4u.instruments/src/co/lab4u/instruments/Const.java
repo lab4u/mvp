@@ -7,4 +7,6 @@ public final class Const {
 	public static final String LAB_ID = "_idLab_";
 	public static final String BUNDLE_GENERIC_KEY = "_currentBundle_";
 	
+	public static final String TAG_ERROR_LOG = "_ErrorLog_";
+	
 }

@@ -2,31 +2,32 @@ package co.lab4u.instruments;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import android.app.ListActivity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.SyncStateContract.Constants;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import co.lab4u.instruments.adapters.LabItemAdapter;
+import co.lab4u.instruments.helpers.JsonParser;
 import co.lab4u.instruments.models.ILaboratory;
-import co.lab4u.instruments.models.Laboratory;
 import co.lab4u.instruments.models.LaboratoryStaticFactory;
+import co.lab4u.instruments.proxies.ILabPlatformProxy;
+import co.lab4u.instruments.proxies.LabPlatformProxy;
 
 public class LabFinder extends ListActivity {
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        ILabPlatformProxy proxy = new LabPlatformProxy();
+        ILaboratory lab = proxy.getLaboratory(1045);
         
         List<ILaboratory> labs = new ArrayList<ILaboratory>() {{
         	add(LaboratoryStaticFactory.getInstance().CreateLaboratory(1, "Some title 1", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat", Calendar.getInstance(), Calendar.getInstance()));
