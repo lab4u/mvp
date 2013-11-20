@@ -2,20 +2,19 @@ package co.lab4u.instruments.proxies;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.ksoap2.SoapEnvelope;
-import org.ksoap2.serialization.PropertyInfo;
-import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapSerializationEnvelope;
-import org.ksoap2.transport.HttpTransportSE;
 
 import android.util.Log;
 
 import co.lab4u.instruments.Const;
 import co.lab4u.instruments.helpers.JsonParser;
+import co.lab4u.instruments.helpers.WebServiceHelper;
+import co.lab4u.instruments.models.EmptyLaboratory;
 import co.lab4u.instruments.models.ILaboratory;
 import co.lab4u.instruments.models.Laboratory;
 
@@ -32,55 +31,45 @@ public class LabPlatformProxy implements ILabPlatformProxy {
     private static String TAG_TITLE = "Title";
     private static String TAG_CONTENT = "CreationDate";
     private static String TAG_ROOT = "Laboratory";
+    private static String TAG_LAB_CONTENT = "LabContent";
+    private static String TAG_LAB_CONTENT_TEXT = "Text";
     
-    @Override
-	public ILaboratory getLaboratory(int idLab) {
-	    String jsonStr  = "";
+    private String getJsonResultFromWebService(int id) {
+    	String jsonResult = "";
     	
-	     //Initialize soap request + add parameters
-        SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME1);       
-       
-        //Use this to add parameters
-        request.addProperty("id", String.valueOf(idLab));
-       
-        //Declare the version of the SOAP request
-        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-       
-        envelope.setOutputSoapObject(request);
-        envelope.dotNet = true;
-       
-        try {
-        	 HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
-             
-             //this is the actual part that will call the webservice
-             androidHttpTransport.call(SOAP_ACTION1, envelope);
-            
-             // Get the SoapResult from the envelope body.
-             SoapObject result = (SoapObject)envelope.bodyIn;
-             
-              if(result != null)
-              {
-                    //Get the first property and change the label text
-                    jsonStr = result.getProperty(0).toString();
-              }
-              
-        	JSONObject jsonObj = JsonParser.getInstance().getJSONFrom(jsonStr);
+    	Map<String, String> parms = new HashMap<String, String>();
+	    parms.put("id", String.valueOf(id));
+	    
+    	jsonResult = WebServiceHelper.getInstance().getSimpleStringResult(SOAP_ACTION1, NAMESPACE, METHOD_NAME1, URL, parms);
+    	
+    	return jsonResult;
+    }
+    
+    private ILaboratory mapLaboratoryFromJsonFormattedInString(String str) {
+    	ILaboratory lab = new EmptyLaboratory();;
+    	
+    	try {
+            JSONObject jsonObj = JsonParser.getInstance().getJSONFrom(str);
         	
         	int id = Integer.parseInt(jsonObj.getString(TAG_ID));
         	
         	Calendar creationDate = Calendar.getInstance();
         	Calendar lastModifiedDate = Calendar.getInstance();
         	
-        	creationDate.setTimeInMillis(Long.parseLong(jsonObj.getString(TAG_CREATION_DATE))); 
-        	 
+        	long longCreationDate = Long.parseLong(jsonObj.getString(TAG_CREATION_DATE).replace("/Date", ""));
+        	String strLastModifiedDate = jsonObj.getString(TAG_LAST_MODIFIED_DATE);
+        	long longLastModifiedDate = 0;
+        	if (strLastModifiedDate.length() < 6) jsonObj.getString(TAG_CREATION_DATE); 
         	
+        	if (longCreationDate > 0)
+        		creationDate.setTimeInMillis(longCreationDate);
         	
+        	if (longLastModifiedDate > 0) 
+        		lastModifiedDate.setTimeInMillis(longLastModifiedDate);
         	
-//        	creationDate.setTime(sdf.parse(jsonObj.getString(TAG_CREATION_DATE)));
-//        	lastModifiedDate.setTime(sdf.parse(jsonObj.getString(TAG_CREATION_DATE)));
+        	String content = jsonObj.getJSONObject(TAG_LAB_CONTENT).getString(TAG_LAB_CONTENT_TEXT);
         	
         	String title = jsonObj.getString(TAG_TITLE);
-        	String content = "";
         	
         	return new Laboratory(id, title, content, creationDate , lastModifiedDate);
         	            
@@ -89,9 +78,17 @@ public class LabPlatformProxy implements ILabPlatformProxy {
         } catch (Exception e) {
         	Log.e(Const.TAG_ERROR_LOG, e.toString());
         }
-	
+    	
+    	return lab;
+    } 
+    
+    @Override
+	public ILaboratory getLaboratory(int idLab) {
+	    
+    	String jsonStr = this.getJsonResultFromWebService(idLab);
+    	
+    	ILaboratory lab = this.mapLaboratoryFromJsonFormattedInString(jsonStr);
         
-        return null;
+        return lab;
 	}
-
 }
