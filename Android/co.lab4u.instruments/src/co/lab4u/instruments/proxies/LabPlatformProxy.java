@@ -26,12 +26,6 @@ public class LabPlatformProxy implements ILabPlatformProxy {
     private static String METHOD_NAME1 = "GetLaboratory";
     private static String URL = "http://lab4uservices.cloudapp.net/LabService.asmx?WSDL";
 	
-//	private static String SOAP_ACTION1 = "http://www.w3schools.com/webservices/FahrenheitToCelsius";
-//    private static String NAMESPACE = "http://www.w3schools.com/webservices/";
-//    private static String METHOD_NAME1 = "FahrenheitToCelsius";
-//    private static String URL = "http://www.w3schools.com/webservices/tempconvert.asmx?WSDL";
-//
-
     private static String TAG_CREATION_DATE = "CreationDate";
     private static String TAG_ID = "Id";
     private static String TAG_LAST_MODIFIED_DATE = "LastModifiedDate";
@@ -77,8 +71,8 @@ public class LabPlatformProxy implements ILabPlatformProxy {
         	Calendar creationDate = Calendar.getInstance();
         	Calendar lastModifiedDate = Calendar.getInstance();
         	
-//        	creationDate.setTimeInMillis(Long.parseLong(jsonObj.getString(TAG_CREATION_DATE))); 
-        	creationDate.setTimeInMillis(Long.parseLong("1383742297900")); 
+        	creationDate.setTimeInMillis(Long.parseLong(jsonObj.getString(TAG_CREATION_DATE))); 
+        	 
         	
         	
         	
