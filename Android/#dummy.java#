@@ -1,0 +1,3 @@
+string a = "hola";
+
+if (Int32.TryParse(a)) Int32.Parse(a);

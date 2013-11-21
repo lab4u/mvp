@@ -8,5 +8,7 @@
     <string name="labContent">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
     <string name="title_activity_lab_finder_item">LabFinderItem</string>
     <string name="title_activity_lab_viewer">LabViewer</string>
+    <string name="search_hint">Buscar Laboratorio</string>
+    <string name="errorNotANumber">Opps! tiene un formato incorrecto para el identificador del laboratorio. Use solo números</string>
 
 </resources>
