@@ -45,7 +45,7 @@ public class LabFinder extends ListActivity {
 	}
 
 	private void showNotANumberErrorMessage() {
-		Toast.makeText(this, R.string.errorNotANumber, Toast.LENGTH_SHORT);
+		Toast.makeText(this, R.string.errorNotANumber, Toast.LENGTH_SHORT).show();
 	}
 
 	private int geLabId(Intent intent) {
