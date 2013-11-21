@@ -26,16 +26,10 @@ public class LabFinder extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        ILabPlatformProxy proxy = new LabPlatformProxy();
-        ILaboratory lab = proxy.getLaboratory(1045);
+        List<ILaboratory> labs = new ArrayList<ILaboratory>();
         
-        List<ILaboratory> labs = new ArrayList<ILaboratory>() {{
-        	add(LaboratoryStaticFactory.getInstance().CreateLaboratory(1, "Some title 1", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat", Calendar.getInstance(), Calendar.getInstance()));
-        	add(LaboratoryStaticFactory.getInstance().CreateLaboratory(2, "Some title 2", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat", Calendar.getInstance(), Calendar.getInstance()));
-        	add(LaboratoryStaticFactory.getInstance().CreateLaboratory(3, "Some title 3", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat", Calendar.getInstance(), Calendar.getInstance()));
-        	add(LaboratoryStaticFactory.getInstance().CreateLaboratory(4, "Some title 4", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat", Calendar.getInstance(), Calendar.getInstance()));
-        }};
-        
+        labs.add(lab);
+
         ListAdapter adapter = new LabItemAdapter(this, labs);
         
         // bind to adapter

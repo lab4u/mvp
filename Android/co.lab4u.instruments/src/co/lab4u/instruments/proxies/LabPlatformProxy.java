@@ -1,16 +1,12 @@
 package co.lab4u.instruments.proxies;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.util.Log;
-
 import co.lab4u.instruments.Const;
 import co.lab4u.instruments.helpers.JsonParser;
 import co.lab4u.instruments.helpers.WebServiceHelper;
@@ -29,8 +25,6 @@ public class LabPlatformProxy implements ILabPlatformProxy {
     private static String TAG_ID = "Id";
     private static String TAG_LAST_MODIFIED_DATE = "LastModifiedDate";
     private static String TAG_TITLE = "Title";
-    private static String TAG_CONTENT = "CreationDate";
-    private static String TAG_ROOT = "Laboratory";
     private static String TAG_LAB_CONTENT = "LabContent";
     private static String TAG_LAB_CONTENT_TEXT = "Text";
     
@@ -56,10 +50,12 @@ public class LabPlatformProxy implements ILabPlatformProxy {
         	Calendar creationDate = Calendar.getInstance();
         	Calendar lastModifiedDate = Calendar.getInstance();
         	
-        	long longCreationDate = Long.parseLong(jsonObj.getString(TAG_CREATION_DATE).replace("/Date", ""));
+        	long longCreationDate = Long.parseLong(jsonObj.getString(TAG_CREATION_DATE).replace("/Date(", "").replace(")/",""));
         	String strLastModifiedDate = jsonObj.getString(TAG_LAST_MODIFIED_DATE);
         	long longLastModifiedDate = 0;
-        	if (strLastModifiedDate.length() < 6) jsonObj.getString(TAG_CREATION_DATE); 
+        	
+        	if (strLastModifiedDate.length() > 6) 
+        		longLastModifiedDate =  Long.parseLong(strLastModifiedDate.replace("/Date(", "").replace(")/", ""));
         	
         	if (longCreationDate > 0)
         		creationDate.setTimeInMillis(longCreationDate);
@@ -84,7 +80,6 @@ public class LabPlatformProxy implements ILabPlatformProxy {
     
     @Override
 	public ILaboratory getLaboratory(int idLab) {
-	    
     	String jsonStr = this.getJsonResultFromWebService(idLab);
     	
     	ILaboratory lab = this.mapLaboratoryFromJsonFormattedInString(jsonStr);
