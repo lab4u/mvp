@@ -38,14 +38,18 @@ public class LabFinder extends ListActivity {
 		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
 			int idLab = this.geLabId(intent);
 			
-			if (idLab < 0) this.showNotANumberErrorMessage();
+			if (idLab < 0) { 
+				this.showNotANumberErrorMessage();
+			    
+				return;
+			}
 
 			this.showLabInList(idLab);
 	    }
 	}
 
 	private void showNotANumberErrorMessage() {
-		Toast.makeText(this, R.string.errorNotANumber, Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, R.string.errorNotANumber, Toast.LENGTH_LONG).show();
 	}
 
 	private int geLabId(Intent intent) {
@@ -60,8 +64,14 @@ public class LabFinder extends ListActivity {
 	private void showLabInList(int id) {
 
 		List<ILaboratory> labs = this.getLabsById(id);
+		
+		if (labs.isEmpty()) this.showLabNotFoundWarning();
         
 		this.setListLabItemAdapterOnScreen(labs);
+	}
+
+	private void showLabNotFoundWarning() {
+		Toast.makeText(this, R.string.warningNotANumber, Toast.LENGTH_LONG).show();
 	}
 
 	private void setListLabItemAdapterOnScreen(List<ILaboratory> labs) {
@@ -95,7 +105,6 @@ public class LabFinder extends ListActivity {
 		    startActivity(intent);
 		  }
 	    });
-		
 	}
 
 	private ArrayList<ILaboratory> getLabsById(int id) {
@@ -104,7 +113,8 @@ public class LabFinder extends ListActivity {
 		ILabPlatformProxy proxy = new LabPlatformProxy();
         ILaboratory lab = proxy.getLaboratory(id);
         
-        labs.add(lab);
+        if (lab.isEmpty() == false)
+        	labs.add(lab);
         
         return labs;
 	}           
