@@ -6,13 +6,18 @@ import java.util.List;
 
 import android.app.ListActivity;
 import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 import co.lab4u.instruments.adapters.LabItemAdapter;
@@ -24,6 +29,22 @@ import co.lab4u.instruments.proxies.LabPlatformProxy;
 
 public class LabFinder extends ListActivity {
 
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.options_menu, menu);
+
+	    // Associate searchable configuration with the SearchView
+	    SearchManager searchManager =
+	           (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+	    SearchView searchView =
+	            (SearchView) menu.findItem(R.id.search).getActionView();
+	    searchView.setSearchableInfo(
+	            searchManager.getSearchableInfo(getComponentName()));
+
+	    return true;
+	}	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

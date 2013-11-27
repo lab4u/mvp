@@ -18,13 +18,16 @@
         android:id="@+id/labTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Lab Title" />
+        android:text="Lab Title"
+        android:textStyle="bold"
+        android:textColor="#3399ff"/>
 
     <TextView
         android:id="@+id/labCreationDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="2012-01-02" />
+        android:text="2012-01-02"
+        android:textColor="#3399ff" />
     
     <TextView
         android:id="@+id/labContent"
@@ -36,5 +39,13 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
     	android:paddingRight="@dimen/activity_horizontal_margin"/>
     
- </LinearLayout>    
+ </LinearLayout>
+
+	<ZoomControls
+	    android:id="@+id/labViewerZoomControls"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true"
+	    android:layout_alignParentRight="true" />
+    
 </RelativeLayout>

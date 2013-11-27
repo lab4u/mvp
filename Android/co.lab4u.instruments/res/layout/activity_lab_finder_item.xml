@@ -42,15 +42,12 @@
 	        android:text="@string/labContent"
 	        android:textColor="#3399ff"
 	        android:textSize="12sp" />
-	
-
     </LinearLayout>
-    
-		<ImageView
+
+    <ImageView
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:layout_gravity="center"
 		    android:src="@drawable/flecha_roja"
 		    android:layout_marginLeft="5sp" />
-
 </LinearLayout>
