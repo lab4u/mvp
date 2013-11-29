@@ -1,15 +1,14 @@
 package co.lab4u.instruments;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import android.app.ListActivity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.view.MenuItemCompat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -21,14 +20,11 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 import co.lab4u.instruments.adapters.LabItemAdapter;
-import co.lab4u.instruments.helpers.JsonParser;
 import co.lab4u.instruments.models.ILaboratory;
-import co.lab4u.instruments.models.LaboratoryStaticFactory;
 import co.lab4u.instruments.proxies.ILabPlatformProxy;
 import co.lab4u.instruments.proxies.LabPlatformProxy;
 
 public class LabFinder extends ListActivity {
-
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -65,8 +61,8 @@ public class LabFinder extends ListActivity {
 				return;
 			}
 
-			this.showLabInList(idLab);
-	    }
+			LaboratoryAsyncTask task = new LaboratoryAsyncTask();
+			task.execute(new Integer[]{ idLab } );	    }
 	}
 
 	private void showNotANumberErrorMessage() {
@@ -82,61 +78,66 @@ public class LabFinder extends ListActivity {
 		}
 	}
 
-	private void showLabInList(int id) {
+	private class LaboratoryAsyncTask extends AsyncTask<Integer, Void, ILaboratory> {
 
-		List<ILaboratory> labs = this.getLabsById(id);
-		
-		if (labs.isEmpty()) this.showLabNotFoundWarning();
-        
-		this.setListLabItemAdapterOnScreen(labs);
-	}
-
-	private void showLabNotFoundWarning() {
-		Toast.makeText(this, R.string.warningNotANumber, Toast.LENGTH_LONG).show();
-	}
-
-	private void setListLabItemAdapterOnScreen(List<ILaboratory> labs) {
-		ListAdapter adapter = new LabItemAdapter(this, labs);
-	      
-	    // bind to adapter
-	    setListAdapter(adapter);
-	      
-	    ListView listView = getListView();
-	      
-	    listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-	    
-	    listView.setOnItemClickListener(new OnItemClickListener() {
-	
 		@Override
-	    public void onItemClick(AdapterView<?> parent, View view, int position,
-		  		long id) {
-	
-		  
-			Intent intent = new Intent(LabFinder.this, LabViewer.class);
+		protected ILaboratory doInBackground(Integer... args) {
+			int idLab = args[0];
+			
+			ILabPlatformProxy proxy = new LabPlatformProxy();
+	        ILaboratory lab = proxy.getLaboratory(idLab);
+			
+	        return lab;
+		}
 		
-	   	    TextView titleView = (TextView)view.findViewById(R.id.labTitle);
-		    TextView contentView = (TextView)view.findViewById(R.id.labContent);
+		@Override
+	    protected void onPostExecute(ILaboratory result) {
+			List<ILaboratory> labs = new ArrayList<ILaboratory>();
+			
+			labs.add(result);
+			
+			if (labs.isEmpty()) this.showLabNotFoundWarning();
+	        
+			this.setListLabItemAdapterOnScreen(labs);
+	        
+			super.onPostExecute(result);
+	    }
 		
-		    Bundle bundle = new Bundle();
-		    bundle.putString(Const.LAB_TITLE_KEY, titleView.getText().toString());
-		    bundle.putString(Const.LAB_CONTENT_KEY, contentView.getText().toString());
-		  
-		    intent.putExtra(Const.BUNDLE_GENERIC_KEY, bundle);
-		  
-		    startActivity(intent);
-		  }
-	    });
-	}
+		private void showLabNotFoundWarning() {
+			Toast.makeText(getApplicationContext(), R.string.warningNotANumber, Toast.LENGTH_LONG).show();
+		}
+		
+		private void setListLabItemAdapterOnScreen(List<ILaboratory> labs) {
+			ListAdapter adapter = new LabItemAdapter(getApplicationContext(), labs);
+		      
+		    // bind to adapter
+		    setListAdapter(adapter);
+		      
+		    ListView listView = getListView();
+		      
+		    listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+		    
+		    listView.setOnItemClickListener(new OnItemClickListener() {
+		
+			@Override
+		    public void onItemClick(AdapterView<?> parent, View view, int position,
+			  		long id) {
 
-	private ArrayList<ILaboratory> getLabsById(int id) {
-		ArrayList<ILaboratory> labs = new ArrayList<ILaboratory>();
+				Intent intent = new Intent(LabFinder.this, LabViewer.class);
+			
+		   	    TextView titleView = (TextView)view.findViewById(R.id.labTitle);
+			    TextView contentView = (TextView)view.findViewById(R.id.labContent);
+			
+			    Bundle bundle = new Bundle();
+			    bundle.putString(Const.LAB_TITLE_KEY, titleView.getText().toString());
+			    bundle.putString(Const.LAB_CONTENT_KEY, contentView.getText().toString());
+			  
+			    intent.putExtra(Const.BUNDLE_GENERIC_KEY, bundle);
+			  
+			    startActivity(intent);
+			  }
+		    });
+		}
 		
-		ILabPlatformProxy proxy = new LabPlatformProxy();
-        ILaboratory lab = proxy.getLaboratory(id);
-        
-        if (lab.isEmpty() == false)
-        	labs.add(lab);
-        
-        return labs;
-	}           
+	}
 }
