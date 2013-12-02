@@ -30,28 +30,35 @@ public class LabViewer extends Activity {
 	TextView titleTextView;
 	TextView contentTextView;
 
-	ShareActionProvider mShareActionProvider;
-
-	
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lab_viewer);
-		// Show the Up button in the action bar.
-		setupActionBar();
 		
 		Intent intent = getIntent();
 	
-		zoomControls = (ZoomControls)this.findViewById(R.id.labViewerZoomControls); 
-		titleTextView = (TextView) this.findViewById(R.id.labTitle);
-		contentTextView = (TextView) this.findViewById(R.id.labContent);
+		initWidgets();
+		
+		handlingZoomControlsEvents();
 		
 		Bundle b = intent.getBundleExtra(Const.BUNDLE_GENERIC_KEY);
 		
+		setTextToWidgetsFrom(b);
+	}
+
+	private void setTextToWidgetsFrom(Bundle b) {
 		titleTextView.setText(b.getString(Const.LAB_TITLE_KEY));
 		contentTextView.setText(Html.fromHtml(b.getString(Const.LAB_CONTENT_KEY)));
-		
+	}
+
+	private void initWidgets() {
+		titleTextView = (TextView) this.findViewById(R.id.labTitle);
+		contentTextView = (TextView) this.findViewById(R.id.labContent);
+		zoomControls = (ZoomControls)this.findViewById(R.id.labViewerZoomControls);
+	}
+
+	private void handlingZoomControlsEvents() {
 		zoomControls.setOnZoomInClickListener(new OnClickListener() {
 
 			@Override
@@ -77,19 +84,9 @@ public class LabViewer extends Activity {
 				}
 			}
 		});
-		
 	}
 
-	/**
-	 * Set up the {@link android.app.ActionBar}, if the API is available.
-	 */
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	private void setupActionBar() {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			getActionBar().setDisplayHomeAsUpEnabled(true);
-		}
-	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
