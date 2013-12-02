@@ -2,8 +2,19 @@
 
     <item
         android:id="@+id/action_settings"
+        android:icon="@drawable/ic_action_settings"
         android:orderInCategory="100"
-        android:showAsAction="never"
+        android:showAsAction="always|collapseActionView"
         android:title="@string/action_settings"/>
+    
+ 	<item android:id="@+id/spectro_cell"
+          android:icon="@drawable/formula"
+          android:title="@string/menu_spectrocell"
+          android:showAsAction="collapseActionView"/>
+    
+    <item android:id="@+id/acelerometroe"
+          android:icon="@drawable/formula"
+          android:title="@string/menu_acelerometro"
+          android:showAsAction="collapseActionView" />    
 
 </menu>

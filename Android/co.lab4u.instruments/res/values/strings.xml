@@ -10,8 +10,14 @@
     <string name="title_activity_lab_viewer">LabViewer</string>
     <string name="search_title">Buscar Laboratorio</string>
     <string name="search_hint">Buscar Laboratorio</string>
-
+    
+    <string name="menu_spectrocell">SpectroCell</string>
+    <string name="menu_acelerometro">Acelerometro</string>
+    <string name="menuShare">Share</string>
+    
     <string name="errorNotANumber">¡Opps! hay un error: formato incorrecto para buscar un laboratorio</string>
     <string name="warningNotANumber">No hemos encontrado tu laboratorio</string>
+    
+    
 
 </resources>
