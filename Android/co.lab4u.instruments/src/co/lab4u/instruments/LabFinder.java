@@ -31,16 +31,21 @@ public class LabFinder extends ListActivity {
 	    MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.options_menu, menu);
 
+	    this.setUpSearchManager(menu);
+
+	    return true;
+	}
+	
+	private void setUpSearchManager(Menu menu) {
 	    // Associate searchable configuration with the SearchView
 	    SearchManager searchManager =
 	           (SearchManager) getSystemService(Context.SEARCH_SERVICE);
 	    SearchView searchView =
 	            (SearchView) menu.findItem(R.id.search).getActionView();
 	    searchView.setSearchableInfo(
-	            searchManager.getSearchableInfo(getComponentName()));
-
-	    return true;
-	}	
+	            searchManager.getSearchableInfo(getComponentName()));		
+	}
+	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

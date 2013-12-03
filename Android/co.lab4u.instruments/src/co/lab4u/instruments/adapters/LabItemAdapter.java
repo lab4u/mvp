@@ -6,6 +6,7 @@ import co.lab4u.instruments.R;
 import co.lab4u.instruments.models.ILaboratory;
 import co.lab4u.instruments.models.Laboratory;
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +51,7 @@ public class LabItemAdapter extends ArrayAdapter<ILaboratory> {
 		ILaboratory lab = this.values.get(position);
 		if (lab.isEmpty() == false) {
 			textViewTitle.setText(lab.getTitle());
-			textViewContent.setText(lab.getContent());
+			textViewContent.setText(Html.fromHtml(lab.getContent()));
 		}
 	}
 
