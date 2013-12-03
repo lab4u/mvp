@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ShareActionProvider;
@@ -16,10 +17,15 @@ import android.text.Html;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.graphics.Matrix;
 import android.os.Build;
 
 @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 public class LabViewer extends Activity {
+	
+	Matrix drawMatrix;
+	float lastFocusX;
+	float lastFocusY;
 	
 	public static final float BASE_FONT_SIZE = 21;
 	public static final float INTERVAL_FOR_FONT_SIZE = 2;
@@ -46,7 +52,7 @@ public class LabViewer extends Activity {
 		
 		setTextToWidgetsFrom(b);
 	}
-
+	
 	private void setTextToWidgetsFrom(Bundle b) {
 		titleTextView.setText(b.getString(Const.LAB_TITLE_KEY));
 		contentTextView.setText(Html.fromHtml(b.getString(Const.LAB_CONTENT_KEY)));
@@ -85,7 +91,6 @@ public class LabViewer extends Activity {
 			}
 		});
 	}
-
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
