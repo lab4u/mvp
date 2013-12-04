@@ -27,54 +27,57 @@ import co.lab4u.instruments.proxies.LabPlatformProxy;
 public class LabFinder extends ListActivity {
 	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-	    MenuInflater inflater = getMenuInflater();
-	    inflater.inflate(R.menu.options_menu, menu);
-
-	    this.setUpSearchManager(menu);
-
-	    return true;
-	}
-	
-	private void setUpSearchManager(Menu menu) {
-	    // Associate searchable configuration with the SearchView
-	    SearchManager searchManager =
-	           (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-	    SearchView searchView =
-	            (SearchView) menu.findItem(R.id.search).getActionView();
-	    searchView.setSearchableInfo(
-	            searchManager.getSearchableInfo(getComponentName()));		
-	}
-	
-	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
         Intent intent = getIntent();
         
-        doIntentAction(intent);
+        performIntentAction(intent);
     }
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.options_menu, menu);
 
-	private void doIntentAction(Intent intent) {
+	    this.initSearchBar(menu);
+
+	    return true;
+	}
+	
+	private void initSearchBar(Menu menu) {
+	    // gets current searhManager
+	    SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+	    
+	    // gets searchview from ##@@#|@1
+	    SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+	    
+	    // set searchable info to searchvuew from search manager
+	    searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));		
+	}
+
+	private void performIntentAction(Intent intent) {
 
 		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-			int idLab = this.geLabId(intent);
+			int idLab = this.geLabIdFrom(intent);
 			
 			if (idLab < 0) { 
 				this.showNotANumberErrorMessage();
 			    
 				return;
 			}
-
+			
+			// async call to web service
 			LaboratoryAsyncTask task = new LaboratoryAsyncTask();
-			task.execute(new Integer[]{ idLab } );	    }
+			task.execute(new Integer[]{ idLab } );	    
+		}
 	}
 
 	private void showNotANumberErrorMessage() {
 		Toast.makeText(this, R.string.errorNotANumber, Toast.LENGTH_LONG).show();
 	}
 
-	private int geLabId(Intent intent) {
+	private int geLabIdFrom(Intent intent) {
 		try {
 			String query = intent.getStringExtra(SearchManager.QUERY);
 			return Integer.parseInt(query);
@@ -89,14 +92,25 @@ public class LabFinder extends ListActivity {
 		protected ILaboratory doInBackground(Integer... args) {
 			int idLab = args[0];
 			
-			ILabPlatformProxy proxy = new LabPlatformProxy();
-	        ILaboratory lab = proxy.getLaboratory(idLab);
+			ILaboratory lab = getLaboratory(idLab);
 			
 	        return lab;
 		}
+
+		private ILaboratory getLaboratory(int idLab) {
+			ILabPlatformProxy proxy = new LabPlatformProxy();
+	        ILaboratory lab = proxy.getLaboratory(idLab);
+			return lab;
+		}
 		
 		@Override
-	    protected void onPostExecute(ILaboratory result) {
+	    protected void onPostExecute(ILaboratory lab) {
+			showLaboratoryOnScreen(lab);
+	        
+			super.onPostExecute(lab);
+	    }
+
+		private void showLaboratoryOnScreen(ILaboratory result) {
 			List<ILaboratory> labs = new ArrayList<ILaboratory>();
 			
 			labs.add(result);
@@ -104,9 +118,7 @@ public class LabFinder extends ListActivity {
 			if (labs.isEmpty()) this.showLabNotFoundWarning();
 	        
 			this.setListLabItemAdapterOnScreen(labs);
-	        
-			super.onPostExecute(result);
-	    }
+		}
 		
 		private void showLabNotFoundWarning() {
 			Toast.makeText(getApplicationContext(), R.string.warningNotANumber, Toast.LENGTH_LONG).show();
@@ -124,25 +136,24 @@ public class LabFinder extends ListActivity {
 		    
 		    listView.setOnItemClickListener(new OnItemClickListener() {
 		
-			@Override
-		    public void onItemClick(AdapterView<?> parent, View view, int position,
-			  		long id) {
-
-				Intent intent = new Intent(LabFinder.this, LabViewer.class);
-			
-		   	    TextView titleView = (TextView)view.findViewById(R.id.labTitle);
-			    TextView contentView = (TextView)view.findViewById(R.id.labContent);
-			
-			    Bundle bundle = new Bundle();
-			    bundle.putString(Const.LAB_TITLE_KEY, titleView.getText().toString());
-			    bundle.putString(Const.LAB_CONTENT_KEY, contentView.getText().toString());
-			  
-			    intent.putExtra(Const.BUNDLE_GENERIC_KEY, bundle);
-			  
-			    startActivity(intent);
-			  }
+				@Override
+			    public void onItemClick(AdapterView<?> parent, View view, int position,	long id) {
+	
+					Intent intent = new Intent(LabFinder.this, LabViewer.class);
+				
+			   	    TextView titleView = (TextView)view.findViewById(R.id.labTitle);
+				    TextView contentView = (TextView)view.findViewById(R.id.labContent);
+				
+				    // put values
+				    Bundle bundle = new Bundle();
+				    bundle.putString(Const.LAB_TITLE_KEY, titleView.getText().toString());
+				    bundle.putString(Const.LAB_CONTENT_KEY, contentView.getText().toString());
+				  
+				    intent.putExtra(Const.BUNDLE_GENERIC_KEY, bundle);
+				  
+				    startActivity(intent);
+				}
 		    });
 		}
-		
 	}
 }
