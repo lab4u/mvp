@@ -35,6 +35,7 @@ public class LabViewer extends Activity {
 	ZoomControls zoomControls;
 	TextView titleTextView;
 	TextView contentTextView;
+	TextView labCreationDate;
 
 	@SuppressLint("NewApi")
 	@Override
@@ -56,11 +57,13 @@ public class LabViewer extends Activity {
 	private void setTextToWidgetsFrom(Bundle b) {
 		titleTextView.setText(b.getString(Const.LAB_TITLE_KEY));
 		contentTextView.setText(Html.fromHtml(b.getString(Const.LAB_CONTENT_KEY)));
+		labCreationDate.setText(b.getString(Const.LAB_CREATION_DATE_KEY));
 	}
 
 	private void initWidgets() {
 		titleTextView = (TextView) this.findViewById(R.id.labTitle);
 		contentTextView = (TextView) this.findViewById(R.id.labContent);
+		labCreationDate = (TextView) this.findViewById(R.id.labCreationDate);
 		zoomControls = (ZoomControls)this.findViewById(R.id.labViewerZoomControls);
 	}
 

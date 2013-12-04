@@ -166,12 +166,14 @@ public class LabFinder extends ListActivity {
 				
 			   	    TextView titleView = (TextView)view.findViewById(R.id.labTitle);
 				    TextView contentView = (TextView)view.findViewById(R.id.labContent);
+				    TextView labCreationDate = (TextView)view.findViewById(R.id.labCreationDate);
 				
 				    // put values
 				    Bundle bundle = new Bundle();
 				    bundle.putString(Const.LAB_TITLE_KEY, titleView.getText().toString());
 				    bundle.putString(Const.LAB_CONTENT_KEY, contentView.getText().toString());
-				  
+				    bundle.putString(Const.LAB_CREATION_DATE_KEY, labCreationDate.getText().toString());
+				    
 				    intent.putExtra(Const.BUNDLE_GENERIC_KEY, bundle);
 				  
 				    startActivity(intent);

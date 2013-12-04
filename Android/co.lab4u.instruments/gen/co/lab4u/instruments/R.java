@@ -37,8 +37,8 @@ public final class R {
         public static final int action_settings=0x7f0a0006;
         public static final int icon=0x7f0a0000;
         public static final int instrumentImageButton=0x7f0a0005;
-        public static final int labContent=0x7f0a0002;
-        public static final int labCreationDate=0x7f0a0003;
+        public static final int labContent=0x7f0a0003;
+        public static final int labCreationDate=0x7f0a0002;
         public static final int labTitle=0x7f0a0001;
         public static final int labViewerZoomControls=0x7f0a0004;
         public static final int search=0x7f0a0009;

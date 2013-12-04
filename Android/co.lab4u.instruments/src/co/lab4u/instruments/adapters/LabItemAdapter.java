@@ -1,5 +1,6 @@
 package co.lab4u.instruments.adapters;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import co.lab4u.instruments.R;
@@ -34,9 +35,16 @@ public class LabItemAdapter extends ArrayAdapter<ILaboratory> {
 		ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
 		TextView textViewTitle = (TextView) rowView.findViewById(R.id.labTitle);
 		TextView textViewContent = (TextView) rowView.findViewById(R.id.labContent);
+		TextView textViewCreationDate = (TextView) rowView.findViewById(R.id.labCreationDate);
 	  
 		// populates the model
-		this.bindModel(rowView, position, imageView, textViewTitle, textViewContent);
+		ILaboratory lab = this.values.get(position);
+		if (lab.isEmpty() == false) {
+			textViewTitle.setText(lab.getTitle());
+			textViewContent.setText(Html.fromHtml(lab.getContent()));
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			textViewCreationDate.setText( formatter.format(lab.getCreationDate().getTime()) );
+		}
 		
 		return rowView;
 	}
@@ -47,12 +55,4 @@ public class LabItemAdapter extends ArrayAdapter<ILaboratory> {
 		return rowView;
 	}
 	
-	private void bindModel(View rowView, int position, View imageView, TextView textViewTitle, TextView textViewContent) {
-		ILaboratory lab = this.values.get(position);
-		if (lab.isEmpty() == false) {
-			textViewTitle.setText(lab.getTitle());
-			textViewContent.setText(Html.fromHtml(lab.getContent()));
-		}
-	}
-
 }
