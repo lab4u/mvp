@@ -33,7 +33,7 @@ public final class R {
         public static final int ic_loading=0x7f020005;
     }
     public static final class id {
-        public static final int acelerometroe=0x7f0a0008;
+        public static final int acelerometroe=0x7f0a0009;
         public static final int action_settings=0x7f0a0006;
         public static final int icon=0x7f0a0000;
         public static final int instrumentImageButton=0x7f0a0005;
@@ -41,8 +41,8 @@ public final class R {
         public static final int labCreationDate=0x7f0a0002;
         public static final int labTitle=0x7f0a0001;
         public static final int labViewerZoomControls=0x7f0a0004;
-        public static final int search=0x7f0a0009;
-        public static final int spectro_cell=0x7f0a0007;
+        public static final int search=0x7f0a0007;
+        public static final int spectro_cell=0x7f0a0008;
     }
     public static final class layout {
         public static final int activity_lab_action_bar=0x7f030000;
@@ -58,8 +58,7 @@ public final class R {
         public static final int lab_finder=0x7f090002;
         public static final int lab_finder_item=0x7f090003;
         public static final int lab_viewer=0x7f090004;
-        public static final int options_menu=0x7f090005;
-        public static final int searchable=0x7f090006;
+        public static final int searchable=0x7f090005;
     }
     public static final class string {
         public static final int action_settings=0x7f070001;

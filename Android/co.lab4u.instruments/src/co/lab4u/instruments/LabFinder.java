@@ -39,7 +39,7 @@ public class LabFinder extends ListActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 	    MenuInflater inflater = getMenuInflater();
-	    inflater.inflate(R.menu.options_menu, menu);
+	    inflater.inflate(R.menu.lab_finder, menu);
 
 	    this.initSearchBar(menu);
 	    
