@@ -11,6 +11,7 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
+        public static final int appBackColor=0x7f050001;
         public static final int title_background=0x7f050000;
     }
     public static final class dimen {
@@ -29,6 +30,7 @@ public final class R {
         public static final int ic_action_search=0x7f020002;
         public static final int ic_action_settings=0x7f020003;
         public static final int ic_launcher=0x7f020004;
+        public static final int ic_loading=0x7f020005;
     }
     public static final class id {
         public static final int acelerometroe=0x7f0a0008;
@@ -62,10 +64,12 @@ public final class R {
     public static final class string {
         public static final int action_settings=0x7f070001;
         public static final int app_name=0x7f070000;
-        public static final int errorNotANumber=0x7f07000c;
+        public static final int errorNotANumber=0x7f07000e;
         public static final int hello_world=0x7f070002;
         public static final int labContent=0x7f070004;
         public static final int labTitle=0x7f070003;
+        public static final int lab_finder_progress_content=0x7f07000d;
+        public static final int lab_finder_progress_title=0x7f07000c;
         public static final int menuShare=0x7f07000b;
         public static final int menu_acelerometro=0x7f07000a;
         public static final int menu_spectrocell=0x7f070009;
@@ -73,7 +77,7 @@ public final class R {
         public static final int search_title=0x7f070007;
         public static final int title_activity_lab_finder_item=0x7f070005;
         public static final int title_activity_lab_viewer=0x7f070006;
-        public static final int warningNotANumber=0x7f07000d;
+        public static final int warningNotANumber=0x7f07000f;
     }
     public static final class style {
         public static final int ActionBar=0x7f080003;

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -41,7 +42,7 @@ public class LabFinder extends ListActivity {
 	    inflater.inflate(R.menu.options_menu, menu);
 
 	    this.initSearchBar(menu);
-
+	    
 	    return true;
 	}
 	
@@ -68,7 +69,7 @@ public class LabFinder extends ListActivity {
 			}
 			
 			// async call to web service
-			LaboratoryAsyncTask task = new LaboratoryAsyncTask();
+			LaboratoryAsyncTask task = new LaboratoryAsyncTask(LabFinder.this);
 			task.execute(new Integer[]{ idLab } );	    
 		}
 	}
@@ -87,7 +88,25 @@ public class LabFinder extends ListActivity {
 	}
 
 	private class LaboratoryAsyncTask extends AsyncTask<Integer, Void, ILaboratory> {
-
+		ProgressDialog progressDialog;
+		ListActivity activity;
+		private Context context;
+		
+		public LaboratoryAsyncTask(ListActivity activity) {
+			this.activity = activity;
+			this.context = activity;
+			
+			progressDialog = new ProgressDialog(context);
+		}
+		
+		@Override
+		protected void onPreExecute() {
+			 this.progressDialog.setTitle(getResources().getString(R.string.lab_finder_progress_title));   
+			 this.progressDialog.setMessage(getResources().getString(R.string.lab_finder_progress_content));
+	            
+			 this.progressDialog.show();
+	    }
+		
 		@Override
 		protected ILaboratory doInBackground(Integer... args) {
 			int idLab = args[0];
@@ -107,6 +126,10 @@ public class LabFinder extends ListActivity {
 	    protected void onPostExecute(ILaboratory lab) {
 			showLaboratoryOnScreen(lab);
 	        
+			progressDialog.dismiss();
+			
+			Toast.makeText(getBaseContext(), "Encontrado!", Toast.LENGTH_LONG).show();
+			
 			super.onPostExecute(lab);
 	    }
 

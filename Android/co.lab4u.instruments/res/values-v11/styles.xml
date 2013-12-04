@@ -6,6 +6,7 @@
     -->
     <style name="AppBaseTheme" parent="android:Theme.Holo.Light">
         <item name="android:actionBarStyle">@style/ActionBar</item>
+       	<item name="android:windowBackground">@color/appBackColor</item>
     </style>
 
     <style name="ActionBar" parent="android:style/Widget.Holo.ActionBar">     

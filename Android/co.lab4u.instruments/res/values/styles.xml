@@ -15,11 +15,15 @@
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <item name="android:windowTitleBackgroundStyle">@style/WindowTitleBackground</item>
+      	<item name="android:windowBackground">@color/appBackColor</item>
     </style>
     
     <style name="WindowTitleBackground">     
         <item name="android:background">@color/title_background</item>
+        
     </style>
+    
+	
  
 
 </resources>

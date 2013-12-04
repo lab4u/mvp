@@ -15,6 +15,9 @@
     <string name="menu_acelerometro">Acelerometro</string>
     <string name="menuShare">Share</string>
     
+    <string name="lab_finder_progress_title">Obteniendo su laboratorio</string>
+    <string name="lab_finder_progress_content">Por favor espere un momento</string>
+    
     <string name="errorNotANumber">¡Opps! hay un error: formato incorrecto para buscar un laboratorio</string>
     <string name="warningNotANumber">No hemos encontrado tu laboratorio</string>
     
