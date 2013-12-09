@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.SensorPlotActivity"
+            android:name="com.lab4u.lab4umvp3.view.SensorPlotActivity"
             android:label="@string/title_activity_sensor_plot" >
         </activity>
     </application>

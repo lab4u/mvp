@@ -1,24 +1,21 @@
 package co.lab4u.instruments;
 
-import android.os.Bundle;
-import android.app.Activity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.ScaleGestureDetector;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ShareActionProvider;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ZoomControls;
-import android.support.v4.app.NavUtils;
-import android.text.Html;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Matrix;
 import android.os.Build;
+import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.text.Html;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
+import android.widget.ZoomControls;
 
 @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 public class LabViewer extends Activity {
@@ -118,7 +115,16 @@ public class LabViewer extends Activity {
 			//
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
+		case R.id.acelerometro:
+			
+			Intent intent = new Intent(LabViewer.this, com.lab4u.lab4umvp3.view.MainActivity.class);
+			
+            startActivity (intent);
+			
+			return true;
 		}
+		
+		
 		return super.onOptionsItemSelected(item);
 	}
 }

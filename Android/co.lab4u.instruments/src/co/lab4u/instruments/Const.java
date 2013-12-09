@@ -9,4 +9,5 @@ public final class Const {
 	
 	public static final String TAG_ERROR_LOG = "_ErrorLog_";
 	
+	public static final String T = "TAG.LAB4U";
 }

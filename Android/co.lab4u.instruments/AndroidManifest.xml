@@ -48,6 +48,13 @@
                 android:value="co.lab4u.instruments.LabFinder" />
         </activity>
         
+        <activity 
+            android:name="com.lab4u.lab4umvp3.view.MainActivity">
+        </activity>
+        <activity
+            android:name="com.lab4u.lab4umvp3.view.SensorPlotActivity">
+        </activity>
+        
         
     </application>
 	    
