@@ -89,6 +89,7 @@ public final class R {
         public static final int btnStopSensorListener=0x7f070004;
         public static final int dummy_button=0x7f070001;
         public static final int dummy_content=0x7f070002;
+        public static final int errorLabNotFound=0x7f070014;
         public static final int errorNotANumber=0x7f070013;
         public static final int hello_world=0x7f070007;
         public static final int labContent=0x7f070009;
@@ -103,7 +104,7 @@ public final class R {
         public static final int title_activity_lab_finder_item=0x7f07000a;
         public static final int title_activity_lab_viewer=0x7f07000b;
         public static final int title_activity_sensor_plot=0x7f070005;
-        public static final int warningNotANumber=0x7f070014;
+        public static final int warningNotANumber=0x7f070015;
     }
     public static final class style {
         public static final int ActionBar=0x7f080006;

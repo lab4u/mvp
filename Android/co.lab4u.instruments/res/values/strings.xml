@@ -19,8 +19,8 @@
     <string name="lab_finder_progress_content">Por favor espere un momento</string>
     
     <string name="errorNotANumber">¡Opps! hay un error: formato incorrecto para buscar un laboratorio</string>
-    <string name="warningNotANumber">No hemos encontrado tu laboratorio</string>
-    
+    <string name="errorLabNotFound">No hemos encontrado tu laboratorio</string>
+    <string name="warningNotANumber">Tiene un error en el formato del id del laboratorio</string>
     
 
 </resources>

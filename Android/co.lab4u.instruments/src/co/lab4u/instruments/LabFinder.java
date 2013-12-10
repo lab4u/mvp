@@ -53,7 +53,7 @@ public class LabFinder extends ListActivity {
 	    // gets searchview from ##@@#|@1
 	    SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
 	    
-	    // set searchable info to searchvuew from search manager
+	    // set searchable info to searchview from search manager
 	    searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));		
 	}
 
@@ -124,11 +124,12 @@ public class LabFinder extends ListActivity {
 		
 		@Override
 	    protected void onPostExecute(ILaboratory lab) {
-			showLaboratoryOnScreen(lab);
-	        
 			progressDialog.dismiss();
 			
-			Toast.makeText(getBaseContext(), "Encontrado!", Toast.LENGTH_LONG).show();
+			if (lab.isEmpty() == false) {
+				showLaboratoryOnScreen(lab);
+				Toast.makeText(getBaseContext(), getResources().getString(R.string.errorLabNotFound), Toast.LENGTH_LONG).show();
+			}
 			
 			super.onPostExecute(lab);
 	    }
