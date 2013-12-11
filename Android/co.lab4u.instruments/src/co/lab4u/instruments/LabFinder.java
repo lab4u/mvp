@@ -90,6 +90,7 @@ public class LabFinder extends ListActivity {
 	private class LaboratoryAsyncTask extends AsyncTask<Integer, Void, ILaboratory> {
 		ProgressDialog progressDialog;
 		ListActivity activity;
+		
 		private Context context;
 		
 		public LaboratoryAsyncTask(ListActivity activity) {
@@ -128,6 +129,8 @@ public class LabFinder extends ListActivity {
 			
 			if (lab.isEmpty() == false) {
 				showLaboratoryOnScreen(lab);
+			}
+			else {
 				Toast.makeText(getBaseContext(), getResources().getString(R.string.errorLabNotFound), Toast.LENGTH_LONG).show();
 			}
 			
