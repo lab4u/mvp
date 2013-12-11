@@ -1,12 +1,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item android:id="@+id/spectro_cell"
-          android:icon="@drawable/formula"
+          android:icon="@drawable/ic_spectrocell"
           android:title="@string/menu_spectrocell"
           android:showAsAction="ifRoom|collapseActionView"/>
     
     <item android:id="@+id/acelerometro"
-          android:icon="@drawable/formula"
+          android:icon="@drawable/ic_acelerometro"
           android:title="@string/menu_acelerometro"
           android:showAsAction="ifRoom|collapseActionView" />
 
