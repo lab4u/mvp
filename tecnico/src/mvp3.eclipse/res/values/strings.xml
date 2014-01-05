@@ -9,5 +9,9 @@
     <string name="title_activity_sensor_plot">SensorPlotActivity</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_list_all_sensor_listener">ListAllSensorListenerActivity</string>
+    <string name="todo">TODO</string>
+    <string name="sensorPlotLabelY">A (m/s2)</string>
+    <string name="sensorPlotLabelX">Time(t)</string>
 
 </resources>

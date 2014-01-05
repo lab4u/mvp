@@ -45,7 +45,11 @@ public class SensorPlotActivityControl implements Lab4uSensorEventListener {
         model.getPitchHistorySeries().addLast(null, event.values[1]);
         model.getRollHistorySeries().addLast(null, event.values[2]);
 
-        //redrawPlot();
+       for(float value : event.values){
+    	   if(value > model.getRangeBoundaries().floatValue()){
+    		   model.setRangeBoundaries(value);
+    	   }
+       }
     }
 
 

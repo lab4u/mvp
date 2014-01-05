@@ -1,40 +1,36 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ecebf1"
-    tools:context=".MainActivity">
+    android:background="@drawable/fondo_splash"
+    android:gravity="bottom"
+    tools:context=".MainActivity" >
 
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:contentDescription="TODO"
+        android:src="@drawable/lab4ph_logo_grande" />
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical">
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:contentDescription="@string/todo"
+        android:src="@drawable/lab4ph_aplicacionde" />
 
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnStartSensorListener"
-                android:text="@string/btnStartSensorListener"
-                android:layout_gravity="center_horizontal" />
+    <Button
+        android:id="@+id/btnMainActivityStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/imageView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="113dp"
+        android:contentDescription="@string/todo"
+        android:background="@drawable/lab4ph_start_grande" />
 
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/btnStopSensorListener"
-                android:id="@+id/btnStopSensorListener"
-                android:layout_gravity="center_horizontal" />
-
-            <ListView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/lvSensorInfo"
-                android:background="@color/black_overlay" />
-
-        </LinearLayout>
-
-
-
-
-
-</FrameLayout>
+</RelativeLayout>

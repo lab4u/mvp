@@ -9,7 +9,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/txtSensorName"
         android:layout_gravity="center_horizontal"
-        android:text="SensorName" />
+        android:text="SensorName" 
+        android:textColor="@color/textColorTitle"/>
 
 
 
@@ -25,6 +26,7 @@
             android:id="@+id/txtX"
             android:layout_gravity="center_horizontal|top"
             android:text="X:"
+            android:textColor="@color/textColorX"
             android:textSize="@dimen/pie_segment_label_font_size" />
 
         <TextView
@@ -34,6 +36,7 @@
             android:id="@+id/txtY"
             android:layout_gravity="center_horizontal|top"
             android:text="Y:"
+            android:textColor="@color/textColorY"
             android:textSize="@dimen/pie_segment_label_font_size" />
 
         <TextView
@@ -43,6 +46,7 @@
             android:id="@+id/txtZ"
             android:layout_gravity="center_horizontal|top"
             android:text="Z:"
+            android:textColor="@color/textColorZ"
             android:textSize="@dimen/pie_segment_label_font_size" />
 
     </LinearLayout>

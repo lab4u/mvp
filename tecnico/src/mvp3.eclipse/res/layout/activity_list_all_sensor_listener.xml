@@ -1,0 +1,43 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ecebf1"
+    tools:context=".ListAllSensorListenerActivity" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/btnStartSensorListener"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="top"
+                android:layout_weight="1"
+                android:background="@drawable/lab4ph_start" />
+
+            <Button
+                android:id="@+id/btnStopSensorListener"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="top"
+                android:layout_weight="1"
+                android:background="@drawable/lab4ph_stop" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/lvSensorInfo"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@color/base_Background" />
+    </LinearLayout>
+
+</FrameLayout>

@@ -1,5 +1,10 @@
 <resources>
 
     <color name="black_overlay">#66000000</color>
-
+	<color name="base_Background">#FFFFFF</color>
+	<color name="textColorTitle">#000000</color>
+	<color name="textColorX">#000099</color>
+	<color name="textColorY">#CC3333</color>
+	<color name="textColorZ">#00CC33</color>
+	
 </resources>

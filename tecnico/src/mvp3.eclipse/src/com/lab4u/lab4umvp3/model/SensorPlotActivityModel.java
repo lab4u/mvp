@@ -1,8 +1,10 @@
 package com.lab4u.lab4umvp3.model;
 
+import java.text.DecimalFormat;
+
 import android.app.Activity;
+import android.content.res.Resources;
 import android.graphics.Color;
-import android.view.View;
 import android.widget.TextView;
 
 import com.androidplot.xy.BoundaryMode;
@@ -11,8 +13,6 @@ import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYStepMode;
 import com.lab4u.lab4umvp3.R;
-
-import java.text.DecimalFormat;
 
 /**
  * Created by ajperalt on 3/10/13.
@@ -31,6 +31,7 @@ public class SensorPlotActivityModel {
 
     private Activity myActivity;
 
+    private Number rangeBoundaries = 10;
 
     /**
      *
@@ -39,6 +40,7 @@ public class SensorPlotActivityModel {
     public void configureViewModels(Activity a) {
 
         this.myActivity = a;
+        Resources r = a.getResources();
         this.aprHistoryPlot = (XYPlot) this.myActivity.findViewById(R.id.aprHistoryPlot);
         this.txtSensorName = (TextView)this.myActivity.findViewById(R.id.txtSensorName);
 
@@ -50,7 +52,7 @@ public class SensorPlotActivityModel {
         rollHistorySeries.useImplicitXVals();
 
 
-        aprHistoryPlot.setRangeBoundaries(-10,10, BoundaryMode.FIXED);
+        aprHistoryPlot.setRangeBoundaries(rangeBoundaries.intValue() * -1 ,rangeBoundaries, BoundaryMode.FIXED);
         aprHistoryPlot.setDomainBoundaries(0, HISTORY_SIZE, BoundaryMode.FIXED);
         aprHistoryPlot.addSeries(azimuthHistorySeries,
                 new LineAndPointFormatter(
@@ -64,9 +66,9 @@ public class SensorPlotActivityModel {
         aprHistoryPlot.setDomainStepMode(XYStepMode.INCREMENT_BY_VAL);
         aprHistoryPlot.setDomainStepValue(HISTORY_SIZE/10);
         aprHistoryPlot.setTicksPerRangeLabel(3);
-        aprHistoryPlot.setDomainLabel("Sample Index");
+        aprHistoryPlot.setDomainLabel(r.getString(R.string.sensorPlotLabelX));
         aprHistoryPlot.getDomainLabelWidget().pack();
-        aprHistoryPlot.setRangeLabel("Angle (Degs)");
+        aprHistoryPlot.setRangeLabel(r.getString(R.string.sensorPlotLabelY));
         aprHistoryPlot.getRangeLabelWidget().pack();
 
         aprHistoryPlot.setRangeValueFormat(new DecimalFormat("#"));
@@ -114,4 +116,17 @@ public class SensorPlotActivityModel {
     public void setTxtSensorName(TextView txtSensorName) {
         this.txtSensorName = txtSensorName;
     }
+
+
+	public Number getRangeBoundaries() {
+		return rangeBoundaries;
+	}
+
+
+	public void setRangeBoundaries(Number rangeBoundaries) {
+		this.rangeBoundaries = rangeBoundaries;
+		aprHistoryPlot.setRangeBoundaries(rangeBoundaries.intValue() * -1 ,rangeBoundaries, BoundaryMode.FIXED);
+	}
+    
+    
 }
