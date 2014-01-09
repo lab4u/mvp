@@ -58,8 +58,6 @@ public class MulticastClient {
         packet = new DatagramPacket(buf, buf.length);
         
         long tIni = System.currentTimeMillis();
-        Thread thread = new Thread(new SimpleMessage());
-        thread.start();
         
         while(Constants.timemillisToWayForOpenSockets > getDifIni(tIni)){
             socket.receive(packet);
@@ -73,24 +71,6 @@ public class MulticastClient {
         }
     }
 
-    class SimpleMessage implements Runnable{
-
-        @Override
-        public void run() {
-            try {
-                String lab4uClient = "LAB4U_CLI_HI";
-                MulticastSocket socket = new MulticastSocket(Constants.MulticastClientPort);
-                InetAddress address = InetAddress.getByName(Constants.MulticastIP);
-                socket.joinGroup(address);
-                InetAddress addres = InetAddress.getByName(Constants.MulticastIP);
-                DatagramPacket packet = new DatagramPacket(lab4uClient.getBytes(), lab4uClient.length(),addres, Constants.MulticastServerPort);
-                socket.send(packet);
-            } catch (IOException ex) {
-                Logger.getLogger(MulticastClient.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-    
     private long getDifIni(long tIni) {
         return System.currentTimeMillis() - tIni;
     }

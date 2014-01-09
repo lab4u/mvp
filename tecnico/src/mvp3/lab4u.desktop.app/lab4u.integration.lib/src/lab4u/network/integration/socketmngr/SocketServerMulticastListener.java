@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.MulticastSocket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +12,7 @@ import java.util.List;
  */
 public class SocketServerMulticastListener extends Thread {
 
-    protected MulticastSocket socket = null;
+    protected DatagramSocket socket = null;
     private boolean socketServerListenerLive = true;
     private ISocketListenerAnswers isocketListener = null;
             
@@ -24,7 +23,7 @@ public class SocketServerMulticastListener extends Thread {
 
     public SocketServerMulticastListener(String name) throws IOException {
         super(name);
-        socket = new MulticastSocket(Constants.MulticastServerPort);
+        socket = new DatagramSocket(Constants.MulticastServerPort);
     }
 
     public void addISocketListenerAnswers(ISocketListenerAnswers isocketListener){
