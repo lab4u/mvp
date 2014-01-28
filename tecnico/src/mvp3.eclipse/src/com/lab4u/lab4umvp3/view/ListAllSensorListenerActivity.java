@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.lab4u.lab4umvp3.R;
@@ -24,7 +25,8 @@ public class ListAllSensorListenerActivity extends Activity {
 	private AdapterSensorListView adapterSensorListView = null;
 	private ListView lvSensorInfo = null;
 	private SensorManager sm = null;
-
+	
+	
 	
 	
 	@Override
@@ -32,6 +34,10 @@ public class ListAllSensorListenerActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_all_sensor_listener);
 		sm = (SensorManager) getSystemService(SENSOR_SERVICE);
+		/*
+		 * Create Lab4uBC singleton with controle the state of
+		 * information to share with others devices
+		 */
 		Lab4uBC.getInstance().startSensorListener(sm);
 		this.configSensorListView();
 		this.addBtnAction();
@@ -60,7 +66,7 @@ public class ListAllSensorListenerActivity extends Activity {
      *
      */
 	private void addBtnAction() {
-		Button btnStartSensorListener = (Button) findViewById(R.id.btnStartSensorListener);
+		ImageButton btnStartSensorListener = (ImageButton) findViewById(R.id.btnStartSensorListener);
 		btnStartSensorListener.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -68,7 +74,7 @@ public class ListAllSensorListenerActivity extends Activity {
 			}
 		});
 
-		Button btnStopSensorListener = (Button) findViewById(R.id.btnStopSensorListener);
+		ImageButton btnStopSensorListener = (ImageButton) findViewById(R.id.btnStopSensorListener);
 		btnStopSensorListener.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
