@@ -1,4 +1,4 @@
-package com.lab4u.lab4umvp3.view;
+package com.lab4u.lab4uphysis.view;
 
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
@@ -7,9 +7,9 @@ import android.app.Activity;
 import android.view.Menu;
 import android.view.View;
 
-import com.lab4u.lab4umvp3.R;
-import com.lab4u.lab4umvp3.control.SensorPlotActivityControl;
-import com.lab4u.lab4umvp3.model.SensorPlotActivityModel;
+import com.lab4u.lab4physis.R;
+import com.lab4u.lab4uphysis.control.SensorPlotActivityControl;
+import com.lab4u.lab4uphysis.model.SensorPlotActivityModel;
 
 public class SensorPlotActivity extends Activity {
 

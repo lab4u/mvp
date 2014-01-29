@@ -1,10 +1,10 @@
-package com.lab4u.lab4umvp3.view;
+package com.lab4u.lab4uphysis.view;
 
 import android.content.Context;
 import android.view.View;
 
-import com.lab4u.lab4umvp3.control.SensorListViewItemControl;
-import com.lab4u.lab4umvp3.model.SensorListViewItemModel;
+import com.lab4u.lab4uphysis.control.SensorListViewItemControl;
+import com.lab4u.lab4uphysis.model.SensorListViewItemModel;
 
 /**
  * Created by ajperalt on 29/09/13.

@@ -1,4 +1,4 @@
-package com.lab4u.lab4umvp3.bussines;
+package com.lab4u.lab4physis.bussines;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import android.hardware.SensorManager;
 import android.util.Log;
 
 import com.lab4u.LAB4UTAG;
-import com.lab4u.lab4umvp3.control.SensorModelControl;
+import com.lab4u.lab4uphysis.control.SensorModelControl;
 import com.lab4u.sensors.listenersensors.Lab4uSensorEventListener;
 
 /**

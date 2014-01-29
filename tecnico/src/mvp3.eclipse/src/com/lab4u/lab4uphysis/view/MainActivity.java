@@ -1,4 +1,4 @@
-package com.lab4u.lab4umvp3.view;
+package com.lab4u.lab4uphysis.view;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,8 +9,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.lab4u.LAB4UTAG;
-import com.lab4u.lab4umvp3.R;
-import com.lab4u.lab4umvp3.bussines.Lab4uBC;
+import com.lab4u.lab4physis.bussines.Lab4uBC;
+import com.lab4u.lab4physis.R;
 
 /**
  *

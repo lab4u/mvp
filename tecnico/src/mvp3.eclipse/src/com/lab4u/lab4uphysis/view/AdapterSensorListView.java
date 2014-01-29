@@ -1,4 +1,4 @@
-package com.lab4u.lab4umvp3.view;
+package com.lab4u.lab4uphysis.view;
 
 import android.content.Context;
 import android.hardware.Sensor;
@@ -12,9 +12,9 @@ import android.widget.ArrayAdapter;
 import com.androidplot.Plot;
 import com.androidplot.util.Redrawer;
 import com.lab4u.LAB4UTAG;
-import com.lab4u.lab4umvp3.R;
-import com.lab4u.lab4umvp3.control.SensorListViewItemControl;
-import com.lab4u.lab4umvp3.model.SensorListViewItemModel;
+import com.lab4u.lab4physis.R;
+import com.lab4u.lab4uphysis.control.SensorListViewItemControl;
+import com.lab4u.lab4uphysis.model.SensorListViewItemModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;

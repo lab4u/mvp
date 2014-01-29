@@ -1,4 +1,4 @@
-package com.lab4u.lab4umvp3.control;
+package com.lab4u.lab4uphysis.control;
 
 import android.hardware.SensorManager;
 

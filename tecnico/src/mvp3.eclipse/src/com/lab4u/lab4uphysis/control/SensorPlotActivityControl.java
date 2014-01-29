@@ -1,4 +1,4 @@
-package com.lab4u.lab4umvp3.control;
+package com.lab4u.lab4uphysis.control;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -6,8 +6,8 @@ import android.hardware.SensorManager;
 
 import com.androidplot.util.Redrawer;
 import com.lab4u.LAB4UTAG;
-import com.lab4u.lab4umvp3.model.SensorListViewItemModel;
-import com.lab4u.lab4umvp3.model.SensorPlotActivityModel;
+import com.lab4u.lab4uphysis.model.SensorListViewItemModel;
+import com.lab4u.lab4uphysis.model.SensorPlotActivityModel;
 import com.lab4u.sensors.listenersensors.Lab4uSensorEventListener;
 import com.lab4u.sensors.persistence.FilePersistSensorInfo;
 

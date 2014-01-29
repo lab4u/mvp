@@ -1,4 +1,4 @@
-package com.lab4u.lab4umvp3.model;
+package com.lab4u.lab4uphysis.model;
 
 import android.graphics.Color;
 import android.view.View;
@@ -10,7 +10,7 @@ import com.androidplot.xy.LineAndPointFormatter;
 import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYStepMode;
-import com.lab4u.lab4umvp3.R;
+import com.lab4u.lab4physis.R;
 
 import java.text.DecimalFormat;
 
