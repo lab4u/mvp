@@ -19,81 +19,74 @@ import com.lab4u.sensors.persistence.Lab4uSensorEmptyPersistence;
 /**
  * Created by ajperalt on 29/09/13.
  */
-public class SensorListViewItemControl  implements Lab4uSensorEventListener {
-    private static String TAG = LAB4UTAG.T + SensorListViewItemControl.class.getSimpleName();
+public class SensorListViewItemControl implements Lab4uSensorEventListener {
+	private static String TAG = LAB4UTAG.T
+			+ SensorListViewItemControl.class.getSimpleName();
 
-    private SensorListViewItemModel model;
-    private ILab4uSensorPersistence persistence = Lab4uSensorEmptyPersistence.getInstance();
-    private Sensor mySensor;
+	private SensorListViewItemModel model;
+	private ILab4uSensorPersistence persistence = Lab4uSensorEmptyPersistence
+			.getInstance();
+	private Sensor mySensor;
 
-    public SensorListViewItemControl(SensorListViewItemModel model) {
-        this.model = model;
-    }
+	public SensorListViewItemControl(SensorListViewItemModel model) {
+		this.model = model;
+	}
 
-    public SensorListViewItemControl() {
-        model = new SensorListViewItemModel();
-    }
+	public SensorListViewItemControl() {
+		model = new SensorListViewItemModel();
+	}
 
-    @Override
-    public String getName() {
-        return "SensorListViewItemControl";
-    }
+	@Override
+	public String getName() {
+		return "SensorListViewItemControl";
+	}
 
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-        model.getTxtX().setText("X:"+event.values[0]);
-        model.getTxtY().setText("Y:"+event.values[1]);
-        model.getTxtZ().setText("Z:"+event.values[2]);
-        if(persistence == null){
-            Log.d(TAG,"persistence = null");
-        }else{
-            persistence.print(event.values);
-        }
-    }
+	@Override
+	public void onSensorChanged(SensorEvent event) {
+		model.getTxtX().setText("X:" + event.values[0]);
+		model.getTxtY().setText("Y:" + event.values[1]);
+		model.getTxtZ().setText("Z:" + event.values[2]);
+		persistence.print(event.values);
+	}
 
+	@Override
+	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
+	}
 
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+	public void configureViewModels(View v) {
+		if (this.model == null) {
+			this.model = new SensorListViewItemModel();
+		}
+		this.model.configureViewModels(v);
+	}
 
-    }
+	public void registerListener(Sensor s, SensorManager sm) {
+		this.mySensor = s;
+		this.model.getTxtSensorName().setText(this.mySensor.getName());
+		// persistence = new FilePersistSensorInfo(this.mySensor.getName());
+		sm.registerListener(this, s, SensorModelControl.SENSOR_DELAY);
+	}
 
-    public void configureViewModels(View v){
-        if(this.model == null){
-            this.model = new SensorListViewItemModel();
-        }
-        this.model.configureViewModels(v);
-    }
+	public SensorListViewItemModel getModel() {
+		return model;
+	}
 
-    public void registerListener(Sensor s, SensorManager sm) {
-        this.mySensor = s;
-        this.model.getTxtSensorName().setText(this.mySensor.getName());
-        persistence = new FilePersistSensorInfo(this.mySensor.getName());
-        sm.registerListener(this,s,SensorModelControl.SENSOR_DELAY);
-    }
+	public void setModel(SensorListViewItemModel model) {
+		this.model = model;
+	}
 
-    public SensorListViewItemModel getModel() {
-        return model;
-    }
+	public void unregisterListener(SensorManager sm) {
+		sm.unregisterListener(this, this.mySensor);
+		persistence.close();
+		persistence = Lab4uSensorEmptyPersistence.getInstance();
+	}
 
-    public void setModel(SensorListViewItemModel model) {
-        this.model = model;
-    }
+	public Sensor getMySensor() {
+		return mySensor;
+	}
 
-    public void unregisterListener(SensorManager sm) {
-        sm.unregisterListener(this,this.mySensor);
-        if(persistence != null &&
-                ! persistence.equals(Lab4uSensorEmptyPersistence.getInstance())){
-            persistence.close();
-            persistence = Lab4uSensorEmptyPersistence.getInstance();
-        }
-    }
-
-    public Sensor getMySensor() {
-        return mySensor;
-    }
-
-    public void setMySensor(Sensor mySensor) {
-        this.mySensor = mySensor;
-    }
+	public void setMySensor(Sensor mySensor) {
+		this.mySensor = mySensor;
+	}
 }

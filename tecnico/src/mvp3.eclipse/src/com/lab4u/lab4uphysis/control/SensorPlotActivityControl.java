@@ -1,94 +1,98 @@
 package com.lab4u.lab4uphysis.control;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorManager;
 
 import com.androidplot.util.Redrawer;
 import com.lab4u.LAB4UTAG;
-import com.lab4u.lab4uphysis.model.SensorListViewItemModel;
+import com.lab4u.lab4uphysis.model.Lab4uSensorAllXYSeries;
 import com.lab4u.lab4uphysis.model.SensorPlotActivityModel;
 import com.lab4u.sensors.listenersensors.Lab4uSensorEventListener;
 import com.lab4u.sensors.persistence.FilePersistSensorInfo;
+import com.lab4u.sensors.persistence.ILab4uSensorPersistence;
+import com.lab4u.sensors.persistence.Lab4uSensorEmptyPersistence;
 
 /**
  * Created by ajperalt on 3/10/13.
  */
 public class SensorPlotActivityControl implements Lab4uSensorEventListener {
-    private static String TAG = LAB4UTAG.T + SensorPlotActivityControl.class.getSimpleName();
+	private static String TAG = LAB4UTAG.T
+			+ SensorPlotActivityControl.class.getSimpleName();
 
-    private SensorPlotActivityModel model;
+	private SensorPlotActivityModel model;
 
-    private static long delayToRedraw = 5 * 1000;
-    private long actualTime = 0l;
+	private static long delayToRedraw = 5 * 1000;
+	private long actualTime = 0l;
 
-    private Sensor mySensor;
+	private Collection<Sensor> mySensors = null;
 
-    private Redrawer redrawer;
+	private Redrawer redrawer;
 
-    @Override
-    public String getName() {
-        return "SensorPlotActivityControl";
-    }
+	
 
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-        // get rid the oldest sample in history:
-        if (model.getRollHistorySeries().size() > SensorListViewItemModel.HISTORY_SIZE) {
-            model.getRollHistorySeries().removeFirst();
-            model.getPitchHistorySeries().removeFirst();
-            model.getAzimuthHistorySeries().removeFirst();
-        }
+	public SensorPlotActivityControl() {
+		mySensors = new ArrayList<Sensor>();
+	}
 
-        // add the latest history sample:
-        model.getAzimuthHistorySeries().addLast(null, event.values[0]);
-        model.getPitchHistorySeries().addLast(null, event.values[1]);
-        model.getRollHistorySeries().addLast(null, event.values[2]);
+	@Override
+	public String getName() {
+		return "SensorPlotActivityControl";
+	}
 
-       for(float value : event.values){
-    	   if(value > model.getRangeBoundaries().floatValue()){
-    		   model.setRangeBoundaries(value);
-    	   }
-       }
-    }
+	@Override
+	public void onSensorChanged(SensorEvent event) {
+		Lab4uSensorAllXYSeries sensorAllS = this.model
+				.getSensorAllXYSeries(event.sensor);
+		sensorAllS.verifiedSizeToPlot();
+		sensorAllS.addValues(event.values);
+	}
 
-
-    /**
+	/**
      *
      */
-    private void redrawPlot() {
-        if(System.currentTimeMillis() - actualTime > delayToRedraw){
-            actualTime = System.currentTimeMillis();
-            this.getModel().getAprHistoryPlot().redraw();
-        }
-    }
+	private void redrawPlot() {
+		if (System.currentTimeMillis() - actualTime > delayToRedraw) {
+			actualTime = System.currentTimeMillis();
+			this.getModel().getAprHistoryPlot().redraw();
+		}
+	}
 
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+	@Override
+	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
-    }
+	}
 
-    public void registerListener(Sensor s, SensorManager sm) {
-        this.mySensor = s;
-        this.model.getTxtSensorName().setText(this.mySensor.getName());
-        sm.registerListener(this,s,SensorModelControl.SENSOR_DELAY);
-        redrawer = new Redrawer(this.getModel().getAprHistoryPlot(),500,false);
-        redrawer.start();
-    }
+	public void registerListener(Sensor s, SensorManager sm) {
+		this.mySensors.add(s);
+		this.model.getTxtSensorName().setText(s.getName());
+		sm.registerListener(this, s, SensorModelControl.SENSOR_DELAY);
+		redrawer = new Redrawer(this.getModel().getAprHistoryPlot(), 500, false);
+		redrawer.start();
+		
+	}
 
-    public void unregisterListener(SensorManager sm) {
-        sm.unregisterListener(this,this.mySensor);
-        if(redrawer != null){
-            redrawer.finish();
-            redrawer = null;
-        }
-    }
+	public void unregisterListener(SensorManager sm) {
+		for (Sensor s : this.mySensors) {
+			sm.unregisterListener(this, s);
+			Lab4uSensorAllXYSeries sensorAllS = this.model
+					.getSensorAllXYSeries(s);
+			sensorAllS.close();
+		}
+		if (redrawer != null) {
+			redrawer.finish();
+			redrawer = null;
+		}
+	}
 
-    public SensorPlotActivityModel getModel() {
-        return model;
-    }
+	public SensorPlotActivityModel getModel() {
+		return model;
+	}
 
-    public void setModel(SensorPlotActivityModel model) {
-        this.model = model;
-    }
+	public void setModel(SensorPlotActivityModel model) {
+		this.model = model;
+	}
 }

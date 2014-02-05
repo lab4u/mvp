@@ -6,6 +6,6 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
-	<classpathentry kind="lib" path="/Users/moliva/lab4u/mvp2/mvp/Android/co.lab4u.instruments/libs/robotium-solo-4.3.1.jar"/>
+	<classpathentry kind="lib" path="/co.lab4u.instruments/libs/robotium-solo-4.3.1.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

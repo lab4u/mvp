@@ -13,57 +13,63 @@ import com.lab4u.lab4uphysis.model.SensorPlotActivityModel;
 
 public class SensorPlotActivity extends Activity {
 
-    public static final String SENSOR_TYPE = "SENSOR_TYPE";
-    private SensorPlotActivityControl control;
-    private SensorPlotActivityModel model;
-    private SensorManager sm = null;
-    private int sensorType = 0;
+	public static final String SENSOR_TYPE = "SENSOR_TYPE";
+	private SensorPlotActivityControl control;
+	private SensorPlotActivityModel model;
+	private SensorManager sm = null;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.sensor_plot_activity);
-        sm = (SensorManager) getSystemService(SENSOR_SERVICE);
+	// private int sensorType = 0;
 
-        Bundle extras = getIntent().getExtras();
-        sensorType  = extras.getInt(SENSOR_TYPE);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.sensor_plot_activity);
+		sm = (SensorManager) getSystemService(SENSOR_SERVICE);
 
-        model  = new SensorPlotActivityModel();
-        model.configureViewModels(this);
-        control = new SensorPlotActivityControl();
-        control.setModel(model);
+		// Bundle extras = getIntent().getExtras();
+		// sensorType = extras.getInt(SENSOR_TYPE);
 
-    }
+		model = new SensorPlotActivityModel();
+		model.configureViewModels(this);
+		control = new SensorPlotActivityControl();
+		control.setModel(model);
 
+	}
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.sensor_plot, menu);
-        return true;
-    }
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.sensor_plot, menu);
+		return true;
+	}
 
+	@Override
+	protected void onPostCreate(Bundle savedInstanceState) {
+		super.onPostCreate(savedInstanceState);
+	}
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-    }
+	@Override
+	protected void onResume() {
+		Sensor s = null;
+		s = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+		control.registerListener(s, sm);
+		s = sm.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
+		control.registerListener(s, sm);
+//		s = sm.getDefaultSensor(Sensor.TYPE_GRAVITY);
+//		control.registerListener(s, sm);
 
-    @Override
-    protected void onResume() {
-        for(Sensor s : sm.getSensorList(sensorType)){
-            control.registerListener(s,sm);
-        }
-        super.onResume();
-    }
-    @Override
-    protected void onPause() {
-        control.unregisterListener(sm);
-        super.onPause();
-    }
-    @Override
-    protected void onStop() {
-        control.unregisterListener(sm);
-        super.onStop();
-    }
+		super.onResume();
+	}
+
+	@Override
+	protected void onPause() {
+		control.unregisterListener(sm);
+		super.onPause();
+	}
+
+	@Override
+	protected void onStop() {
+		control.unregisterListener(sm);
+		super.onStop();
+	}
 }
