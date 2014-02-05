@@ -10,6 +10,7 @@ import com.lab4u.sensors.persistence.Lab4uSensorEmptyPersistence;
 /**
  * 
  * @author ajperalt
+ * Se agrega comentario para verificacion
  * 
  */
 public class Lab4uSensorAllXYSeries {
